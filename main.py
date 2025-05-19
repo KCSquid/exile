@@ -12,6 +12,7 @@ stats = {
     "confidence": 3,
     "legal_status": "pending",
     "battery": 50,
+    "day": 0,
 }
 
 # read json into python object
@@ -39,8 +40,6 @@ def clear_screen():
 
 
 active_id = "arrival"
-
-# day = 1
 
 stat_changes = {}
 game_over = False
@@ -73,7 +72,11 @@ while True:
             active_id = "ending_rooted"
             game_over = True
             continue
-        elif stats["mental_health"] <= 0 or stats["confidence"] <= 0:
+        elif (
+            stats["mental_health"] <= 0
+            or stats["confidence"] <= 0
+            or stats["day"] >= 90
+        ):
             active_id = "ending_burnout"
             game_over = True
             continue
@@ -94,7 +97,7 @@ while True:
 
     clear_screen()
     print("EXILE DIARIES: LOST IN TRANSLATION")
-    # TODO: add day? print(f"Day {day} - ...")
+    print(f"Day {stats["day"] + 1}")
     print(f"{clear_name} - [Unknown Country]")
 
     print(f"\n[{text}]")

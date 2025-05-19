@@ -7,17 +7,17 @@
         {
           "text": "Try to ask someone for directions using broken language.",
           "next_scene": "metro_confusion",
-          "stat_changes": { "language": 1, "trust": 1, "confidence": 1 }
+          "stat_changes": { "language": 1, "trust": 1, "confidence": 1, "day": 1 }
         },
         {
           "text": "Use your phone to find a map.",
           "next_scene": "wifi_search",
-          "stat_changes": { "battery": -20, "confidence": 1 }
+          "stat_changes": { "battery": -20, "confidence": 1, "day": 1 }
         },
         {
           "text": "Wait around, hoping someone approaches you.",
           "next_scene": "missed_opportunity",
-          "stat_changes": { "confidence": -1, "mental_health": -1 }
+          "stat_changes": { "confidence": -1, "mental_health": -1, "day": 1 }
         }
       ]
     },
@@ -28,7 +28,7 @@
         {
           "text": "Ask for help again.",
           "next_scene": "help_received",
-          "stat_changes": { "trust": 1, "language": 1 }
+          "stat_changes": { "trust": 1, "language": 1, "day": 1 }
         },
         {
           "text": "Pretend you know what you're doing.",
@@ -44,7 +44,7 @@
         {
           "text": "Buy a coffee and use the Wi-Fi.",
           "next_scene": "online_translation",
-          "stat_changes": { "money": -1, "language": 1 }
+          "stat_changes": { "money": -1, "language": 1, "day": 1 }
         },
         {
           "text": "Ask to use Wi-Fi without buying anything.",
@@ -92,7 +92,7 @@
         {
           "text": "Pay it to avoid trouble.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": -2, "mental_health": -1 }
+          "stat_changes": { "money": -2, "mental_health": -1, "day": 7 }
         },
         {
           "text": "Refuse. Report it.",
@@ -108,7 +108,7 @@
         {
           "text": "Keep trying and use Grandma’s phrasebook.",
           "next_scene": "language_boost",
-          "stat_changes": { "language": 2, "confidence": 1 }
+          "stat_changes": { "language": 2, "confidence": 1, "day": 14 }
         },
         {
           "text": "Fake your experience and lie.",
@@ -140,7 +140,7 @@
         {
           "text": "Apply to a community college for night classes.",
           "next_scene": "final_check",
-          "stat_changes": { "language": 1, "confidence": 1, "money": -1 }
+          "stat_changes": { "language": 1, "confidence": 1, "money": -1, "day": 30 }
         },
         {
           "text": "Look for better jobs with new skills.",
@@ -168,7 +168,7 @@
         {
           "text": "Fight it out in court.",
           "next_scene": "ending_sent_home",
-          "stat_changes": { "trust": -2, "mental_health": -3 }
+          "stat_changes": { "trust": -2, "mental_health": -3, "day": 10 }
         },
         {
           "text": "Give up and accept deportation.",
@@ -184,7 +184,7 @@
         {
           "text": "Try to find another job immediately.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": 1, "mental_health": -2 }
+          "stat_changes": { "money": 1, "mental_health": -2, "day": 30 }
         },
         {
           "text": "Give up and return to your home country.",
@@ -232,7 +232,7 @@
         {
           "text": "Try to find another opportunity later.",
           "next_scene": "final_check",
-          "stat_changes": { "mental_health": -2, "confidence": -1 }
+          "stat_changes": { "mental_health": -2, "confidence": -1, "day": 1 }
         },
         {
           "text": "Give up on your new life here.",
