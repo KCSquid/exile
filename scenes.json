@@ -2,33 +2,33 @@
   "scenes": [
     {
       "id": "arrival",
-      "text": "You land in a new country with nothing but a suitcase and a low-battery phone. You can't read the signs.",
+      "text": "You land in a new country with nothing but a suitcase and a low-battery phone. You can't read the signs.\nYOU: \"Excuse me... uh... where is... metro?\"",
       "choices": [
         {
           "text": "Try to ask someone for directions using broken language.",
           "next_scene": "metro_confusion",
-          "stat_changes": { "language": 1, "trust": 1, "confidence": 1, "day": 1 }
+          "stat_changes": { "language": 1, "trust": 1, "confidence": 1, "days": 1 }
         },
         {
           "text": "Use your phone to find a map.",
           "next_scene": "wifi_search",
-          "stat_changes": { "battery": -20, "confidence": 1, "day": 1 }
+          "stat_changes": { "battery": -20, "confidence": 1, "days": 1 }
         },
         {
           "text": "Wait around, hoping someone approaches you.",
           "next_scene": "missed_opportunity",
-          "stat_changes": { "confidence": -1, "mental_health": -1, "day": 1 }
+          "stat_changes": { "confidence": -1, "mental_health": -1, "days": 1 }
         }
       ]
     },
     {
       "id": "metro_confusion",
-      "text": "You get vague directions and take the wrong train. A kind older man notices your struggle.",
+      "text": "You get vague directions and take the wrong train. A kind older man notices your struggle.\nYOU: \"Sorry, do you know which train goes to the center?\"\nOLD MAN: \"Ah, you are lost? Come, I show you.\"",
       "choices": [
         {
           "text": "Ask for help again.",
           "next_scene": "help_received",
-          "stat_changes": { "trust": 1, "language": 1, "day": 1 }
+          "stat_changes": { "trust": 1, "language": 1, "days": 1 }
         },
         {
           "text": "Pretend you know what you're doing.",
@@ -39,12 +39,12 @@
     },
     {
       "id": "wifi_search",
-      "text": "You find a café with Wi-Fi, but they ask you to buy something first.",
+      "text": "You find a café with Wi-Fi, but they ask you to buy something first.\nBARISTA: \"You want Wi-Fi? You buy coffee, yes?\"",
       "choices": [
         {
           "text": "Buy a coffee and use the Wi-Fi.",
           "next_scene": "online_translation",
-          "stat_changes": { "money": -1, "language": 1, "day": 1 }
+          "stat_changes": { "money": -1, "language": 1, "days": 1 }
         },
         {
           "text": "Ask to use Wi-Fi without buying anything.",
@@ -55,7 +55,7 @@
     },
     {
       "id": "help_received",
-      "text": "The man helps you find your way and gives you tips for surviving the city.",
+      "text": "The man helps you find your way and gives you tips for surviving the city.\nOLD MAN: \"Be careful, not everyone is friendly. But you will learn. Good luck!\"",
       "choices": [
         {
           "text": "Thank him and continue on your own.",
@@ -71,7 +71,7 @@
     },
     {
       "id": "neighborhood_intro",
-      "text": "You walk through a neighborhood that reminds you of home. A local cultural center invites you in.",
+      "text": "You walk through a neighborhood that reminds you of home. A local cultural center invites you in.\nCENTER HOST: \"Come, join us! We have music and tea.\"",
       "choices": [
         {
           "text": "Join a traditional music class.",
@@ -87,12 +87,12 @@
     },
     {
       "id": "find_shelter",
-      "text": "You get a small room. The landlord is shady and asks for extra under the table.",
+      "text": "You get a small room. The landlord is shady and asks for extra under the table.\nLANDLORD: \"You pay little more, no contract. Okay?\"",
       "choices": [
         {
           "text": "Pay it to avoid trouble.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": -2, "mental_health": -1, "day": 7 }
+          "stat_changes": { "money": -2, "mental_health": -1, "days": 7 }
         },
         {
           "text": "Refuse. Report it.",
@@ -103,12 +103,12 @@
     },
     {
       "id": "job_hunt",
-      "text": "You apply for cleaning and delivery jobs. Interviews go badly due to language barriers.",
+      "text": "You apply for cleaning and delivery jobs. Interviews go badly due to language barriers.\nINTERVIEWER: \"Sorry, your language... not enough. Maybe next time.\"",
       "choices": [
         {
           "text": "Keep trying and use Grandma’s phrasebook.",
           "next_scene": "language_boost",
-          "stat_changes": { "language": 2, "confidence": 1, "day": 14 }
+          "stat_changes": { "language": 2, "confidence": 1, "days": 14 }
         },
         {
           "text": "Fake your experience and lie.",
@@ -119,7 +119,7 @@
     },
     {
       "id": "culture_connection",
-      "text": "You learn new things about your own roots and meet others from your homeland.",
+      "text": "You learn new things about your own roots and meet others from your homeland.\nNEW FRIEND: \"We meet every week. You should come!\"",
       "choices": [
         {
           "text": "Form a WhatsApp group to help newcomers.",
@@ -135,12 +135,12 @@
     },
     {
       "id": "language_boost",
-      "text": "Your effort pays off. You now understand basic conversations and feel more confident.",
+      "text": "Your effort pays off. You now understand basic conversations and feel more confident.\nYOU: \"Excuse me, where is the library?\"\nSTRANGER: \"Down the street, left at the corner.\"",
       "choices": [
         {
           "text": "Apply to a community college for night classes.",
           "next_scene": "final_check",
-          "stat_changes": { "language": 1, "confidence": 1, "money": -1, "day": 30 }
+          "stat_changes": { "language": 1, "confidence": 1, "money": -1, "days": 30 }
         },
         {
           "text": "Look for better jobs with new skills.",
@@ -163,12 +163,12 @@
 
     {
       "id": "legal_trouble",
-      "text": "You report the shady landlord, but things escalate quickly. The authorities get involved, and your immigration status becomes a bigger issue. After a few days, you are detained and told to leave the country.",
+      "text": "You report the shady landlord, but things escalate quickly. The authorities get involved, and your immigration status becomes a bigger issue. After a few days, you are detained and told to leave the country.\nOFFICER: \"You must come with us. There is a problem with your papers.\"",
       "choices": [
         {
           "text": "Fight it out in court.",
           "next_scene": "ending_sent_home",
-          "stat_changes": { "trust": -2, "mental_health": -3, "day": 10 }
+          "stat_changes": { "trust": -2, "mental_health": -3, "days": 10 }
         },
         {
           "text": "Give up and accept deportation.",
@@ -179,12 +179,12 @@
     },
     {
       "id": "underpaid_job",
-      "text": "You lie about your previous work experience and land a job as a cleaner in a hotel. The pay is miserable, and the work conditions are harsh. After a month of being overworked and underpaid, you’re let go.",
+      "text": "You lie about your previous work experience and land a job as a cleaner in a hotel. The pay is miserable, and the work conditions are harsh. After a month of being overworked and underpaid, you’re let go.\nMANAGER: \"Sorry, we don't need you anymore.\"",
       "choices": [
         {
           "text": "Try to find another job immediately.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": 1, "mental_health": -2, "day": 30 }
+          "stat_changes": { "money": 1, "mental_health": -2, "days": 30 }
         },
         {
           "text": "Give up and return to your home country.",
@@ -195,7 +195,7 @@
     },
     {
       "id": "build_community",
-      "text": "You start a small support group for newcomers and people struggling with the same challenges. Slowly, you build a network of people who help each other with housing, jobs, and emotional support.",
+      "text": "You start a small support group for newcomers and people struggling with the same challenges. Slowly, you build a network of people who help each other with housing, jobs, and emotional support.\nGROUP MEMBER: \"Thank you for helping me find a place. I couldn't have done it alone.\"",
       "choices": [
         {
           "text": "Use the group’s resources to help you find better work.",
@@ -227,12 +227,12 @@
     },
     {
       "id": "missed_opportunity",
-      "text": "You sit there, frozen by fear and self-doubt. By the time you gather your thoughts, the chance to get help has passed. You feel alone and isolated.",
+      "text": "You sit there, frozen by fear and self-doubt. By the time you gather your thoughts, the chance to get help has passed. You feel alone and isolated.\nYOU: (thinking) \"Maybe next time... if there is one.\"",
       "choices": [
         {
           "text": "Try to find another opportunity later.",
           "next_scene": "final_check",
-          "stat_changes": { "mental_health": -2, "confidence": -1, "day": 1 }
+          "stat_changes": { "mental_health": -2, "confidence": -1, "days": 1 }
         },
         {
           "text": "Give up on your new life here.",

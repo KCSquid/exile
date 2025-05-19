@@ -12,7 +12,7 @@ stats = {
     "confidence": 3,
     "legal_status": "pending",
     "battery": 50,
-    "day": 0,
+    "days": 0,
 }
 
 # read json into python object
@@ -75,7 +75,7 @@ while True:
         elif (
             stats["mental_health"] <= 0
             or stats["confidence"] <= 0
-            or stats["day"] >= 90
+            or stats["days"] >= 90
         ):
             active_id = "ending_burnout"
             game_over = True
@@ -97,10 +97,13 @@ while True:
 
     clear_screen()
     print("EXILE DIARIES: LOST IN TRANSLATION")
-    print(f"Day {stats["day"] + 1}")
+    print(f"Day {stats["days"] + 1}")
     print(f"{clear_name} - [Unknown Country]")
 
-    print(f"\n[{text}]")
+    print()
+    dialogue = text.split("\n")
+    for message in dialogue:
+        print(f"[{message}]")
 
     if len(stat_changes.keys()) > 0:
         print()
