@@ -1,0 +1,271 @@
+{
+  "scenes": [
+    {
+      "id": "arrival",
+      "text": "You land in a new country with nothing but a suitcase and a low-battery phone. You can't read the signs.",
+      "choices": [
+        {
+          "text": "Try to ask someone for directions using broken language.",
+          "next_scene": "metro_confusion",
+          "stat_changes": { "language": 1, "trust": 1, "confidence": 1 }
+        },
+        {
+          "text": "Use your phone to find a map.",
+          "next_scene": "wifi_search",
+          "stat_changes": { "battery": -20, "confidence": 1 }
+        },
+        {
+          "text": "Wait around, hoping someone approaches you.",
+          "next_scene": "missed_opportunity",
+          "stat_changes": { "confidence": -1, "mental_health": -1 }
+        }
+      ]
+    },
+    {
+      "id": "metro_confusion",
+      "text": "You get vague directions and take the wrong train. A kind older man notices your struggle.",
+      "choices": [
+        {
+          "text": "Ask for help again.",
+          "next_scene": "help_received",
+          "stat_changes": { "trust": 1, "language": 1 }
+        },
+        {
+          "text": "Pretend you know what you're doing.",
+          "next_scene": "get_lost",
+          "stat_changes": { "confidence": -1, "mental_health": -1 }
+        }
+      ]
+    },
+    {
+      "id": "wifi_search",
+      "text": "You find a café with Wi-Fi, but they ask you to buy something first.",
+      "choices": [
+        {
+          "text": "Buy a coffee and use the Wi-Fi.",
+          "next_scene": "online_translation",
+          "stat_changes": { "money": -1, "language": 1 }
+        },
+        {
+          "text": "Ask to use Wi-Fi without buying anything.",
+          "next_scene": "rejected",
+          "stat_changes": { "confidence": -1, "trust": -1 }
+        }
+      ]
+    },
+    {
+      "id": "help_received",
+      "text": "The man helps you find your way and gives you tips for surviving the city.",
+      "choices": [
+        {
+          "text": "Thank him and continue on your own.",
+          "next_scene": "neighborhood_intro",
+          "stat_changes": { "confidence": 1 }
+        },
+        {
+          "text": "Ask if he knows someone renting a cheap place.",
+          "next_scene": "find_shelter",
+          "stat_changes": { "trust": 1, "money": -1 }
+        }
+      ]
+    },
+    {
+      "id": "neighborhood_intro",
+      "text": "You walk through a neighborhood that reminds you of home. A local cultural center invites you in.",
+      "choices": [
+        {
+          "text": "Join a traditional music class.",
+          "next_scene": "culture_connection",
+          "stat_changes": { "cultural_identity": 2, "trust": 1 }
+        },
+        {
+          "text": "Ignore it. Focus on finding a job.",
+          "next_scene": "job_hunt",
+          "stat_changes": { "money": 1, "cultural_identity": -1 }
+        }
+      ]
+    },
+    {
+      "id": "find_shelter",
+      "text": "You get a small room. The landlord is shady and asks for extra under the table.",
+      "choices": [
+        {
+          "text": "Pay it to avoid trouble.",
+          "next_scene": "job_hunt",
+          "stat_changes": { "money": -2, "mental_health": -1 }
+        },
+        {
+          "text": "Refuse. Report it.",
+          "next_scene": "legal_trouble",
+          "stat_changes": { "trust": -1, "legal_status": "pending" }
+        }
+      ]
+    },
+    {
+      "id": "job_hunt",
+      "text": "You apply for cleaning and delivery jobs. Interviews go badly due to language barriers.",
+      "choices": [
+        {
+          "text": "Keep trying and use Grandma’s phrasebook.",
+          "next_scene": "language_boost",
+          "stat_changes": { "language": 2, "confidence": 1 }
+        },
+        {
+          "text": "Fake your experience and lie.",
+          "next_scene": "underpaid_job",
+          "stat_changes": { "money": 2, "confidence": -1, "trust": -1 }
+        }
+      ]
+    },
+    {
+      "id": "culture_connection",
+      "text": "You learn new things about your own roots and meet others from your homeland.",
+      "choices": [
+        {
+          "text": "Form a WhatsApp group to help newcomers.",
+          "next_scene": "build_community",
+          "stat_changes": { "trust": 2, "cultural_identity": 1 }
+        },
+        {
+          "text": "Keep to yourself and just attend events.",
+          "next_scene": "quiet_path",
+          "stat_changes": { "cultural_identity": 1 }
+        }
+      ]
+    },
+    {
+      "id": "language_boost",
+      "text": "Your effort pays off. You now understand basic conversations and feel more confident.",
+      "choices": [
+        {
+          "text": "Apply to a community college for night classes.",
+          "next_scene": "final_check",
+          "stat_changes": { "language": 1, "confidence": 1, "money": -1 }
+        },
+        {
+          "text": "Look for better jobs with new skills.",
+          "next_scene": "final_check",
+          "stat_changes": { "money": 1, "confidence": 1 }
+        }
+      ]
+    },
+    {
+      "id": "final_check",
+      "text": "Months have passed. You reflect on where you are now. Your stats determine your ending.",
+      "choices": [
+        {
+          "text": "End Game",
+          "next_scene": "determine_ending",
+          "stat_changes": {}
+        }
+      ]
+    },
+    
+    {
+      "id": "legal_trouble",
+      "text": "You report the shady landlord, but things escalate quickly. The authorities get involved, and your immigration status becomes a bigger issue. After a few days, you are detained and told to leave the country.",
+      "choices": [
+        {
+          "text": "Fight it out in court.",
+          "next_scene": "ending_sent_home",
+          "stat_changes": { "trust": -2, "mental_health": -3 }
+        },
+        {
+          "text": "Give up and accept deportation.",
+          "next_scene": "ending_sent_home",
+          "stat_changes": { "confidence": -2, "mental_health": -4 }
+        }
+      ]
+    },
+    {
+      "id": "underpaid_job",
+      "text": "You lie about your previous work experience and land a job as a cleaner in a hotel. The pay is miserable, and the work conditions are harsh. After a month of being overworked and underpaid, you’re let go.",
+      "choices": [
+        {
+          "text": "Try to find another job immediately.",
+          "next_scene": "job_hunt",
+          "stat_changes": { "money": 1, "mental_health": -2 }
+        },
+        {
+          "text": "Give up and return to your home country.",
+          "next_scene": "ending_sent_home",
+          "stat_changes": { "trust": -2, "mental_health": -4 }
+        }
+      ]
+    },
+    {
+      "id": "build_community",
+      "text": "You start a small support group for newcomers and people struggling with the same challenges. Slowly, you build a network of people who help each other with housing, jobs, and emotional support.",
+      "choices": [
+        {
+          "text": "Use the group’s resources to help you find better work.",
+          "next_scene": "job_hunt",
+          "stat_changes": { "money": 2, "confidence": 1 }
+        },
+        {
+          "text": "Focus more on building your own life and attend group meetings less.",
+          "next_scene": "quiet_path",
+          "stat_changes": { "cultural_identity": 1, "trust": 2 }
+        }
+      ]
+    },
+    {
+      "id": "quiet_path",
+      "text": "You’ve been keeping to yourself, just attending cultural events occasionally but not getting too involved. You have a steady routine, but the isolation is starting to take a toll on your mental health.",
+      "choices": [
+        {
+          "text": "Push yourself to engage more with people.",
+          "next_scene": "build_community",
+          "stat_changes": { "trust": 2, "mental_health": -2 }
+        },
+        {
+          "text": "Stick with your routine and avoid any more disruptions.",
+          "next_scene": "final_check",
+          "stat_changes": { "mental_health": -1, "confidence": -1 }
+        }
+      ]
+    },
+    {
+      "id": "missed_opportunity",
+      "text": "You sit there, frozen by fear and self-doubt. By the time you gather your thoughts, the chance to get help has passed. You feel alone and isolated.",
+      "choices": [
+        {
+          "text": "Try to find another opportunity later.",
+          "next_scene": "final_check",
+          "stat_changes": { "mental_health": -2, "confidence": -1 }
+        },
+        {
+          "text": "Give up on your new life here.",
+          "next_scene": "ending_sent_home",
+          "stat_changes": { "mental_health": -3, "confidence": -3 }
+        }
+      ]
+    },                
+
+    {
+      "id": "ending_bridge_builder",
+      "text": "You’ve become a bridge for others. Fluent, connected, and proud of your roots.",
+      "ending": true
+    },
+    {
+      "id": "ending_hustler",
+      "text": "You've made it. Good job, good money — but sometimes you wonder what you left behind.",
+      "ending": true
+    },
+    {
+      "id": "ending_rooted",
+      "text": "You’ve built a life and brought your people with you. The old and new now live inside you.",
+      "ending": true
+    },
+    {
+      "id": "ending_burnout",
+      "text": "You pushed hard, but never paused. Somewhere along the way, you lost yourself.",
+      "ending": true
+    },
+    {
+      "id": "ending_sent_home",
+      "text": "It became too much. You didn’t have the support or the system. You're going home — for now.",
+      "ending": true
+    }
+  ]
+}
