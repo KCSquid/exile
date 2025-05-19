@@ -160,7 +160,7 @@
         }
       ]
     },
-    
+
     {
       "id": "legal_trouble",
       "text": "You report the shady landlord, but things escalate quickly. The authorities get involved, and your immigration status becomes a bigger issue. After a few days, you are detained and told to leave the country.",
@@ -245,27 +245,32 @@
     {
       "id": "ending_bridge_builder",
       "text": "You’ve become a bridge for others. Fluent, connected, and proud of your roots.",
-      "ending": true
+      "ending": true,
+      "legal_status": "deported"
     },
     {
       "id": "ending_hustler",
       "text": "You've made it. Good job, good money — but sometimes you wonder what you left behind.",
-      "ending": true
+      "ending": true,
+      "legal_status": "approved"
     },
     {
       "id": "ending_rooted",
       "text": "You’ve built a life and brought your people with you. The old and new now live inside you.",
-      "ending": true
+      "ending": true,
+      "legal_status": "approved"
     },
     {
       "id": "ending_burnout",
       "text": "You pushed hard, but never paused. Somewhere along the way, you lost yourself.",
-      "ending": true
+      "ending": true,
+      "legal_status": "pending"
     },
     {
       "id": "ending_sent_home",
       "text": "It became too much. You didn’t have the support or the system. You're going home — for now.",
-      "ending": true
+      "ending": true,
+      "legal_status": "deported"
     }
   ]
 }

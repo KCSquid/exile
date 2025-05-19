@@ -1,4 +1,6 @@
+import os
 import json
+import platform
 
 # stats as obj to make easy to change
 stats = {
@@ -29,44 +31,60 @@ def clean_string(string):
     return " ".join([w[0].upper() + w[1:] for w in string.split("_")])
 
 
+def clear_screen():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+
 active_id = "arrival"
 
 # day = 1
 
 stat_changes = {}
+game_over = False
 
 # game loop
 while True:
     # check if game over by stats
-    if (
-        stats["language"] >= 5
-        and stats["trust"] >= 4
-        and stats["cultural_identity"] >= 3
-    ):
-        active_id = "ending_bridge_builder"
-        continue
-    elif (
-        stats["money"] >= 6
-        and stats["confidence"] >= 5
-        and stats["cultural_identity"] <= 2
-    ):
-        active_id = "ending_hustler"
-        continue
-    elif (
-        stats["cultural_identity"] >= 5
-        and stats["language"] >= 4
-        and stats["trust"] >= 3
-    ):
-        active_id = "ending_rooted"
-        continue
-    elif stats["mental_health"] <= 2 or stats["confidence"] <= 1:
-        active_id = "ending_burnout"
-        continue
-    elif (
-        stats["money"] <= 1 or stats["legal_status"] == "denied" or stats["trust"] <= 1
-    ):
-        active_id = "ending_sent_home"
-        continue
+    if not game_over:
+        if (
+            stats["language"] >= 7
+            and stats["trust"] >= 6
+            and stats["cultural_identity"] >= 5
+        ):
+            active_id = "ending_bridge_builder"
+            game_over = True
+            continue
+        elif (
+            stats["money"] >= 8
+            and stats["confidence"] >= 7
+            and stats["cultural_identity"] <= 2
+        ):
+            active_id = "ending_hustler"
+            game_over = True
+            continue
+        elif (
+            stats["cultural_identity"] >= 7
+            and stats["language"] >= 6
+            and stats["trust"] >= 5
+        ):
+            active_id = "ending_rooted"
+            game_over = True
+            continue
+        elif stats["mental_health"] <= 0 or stats["confidence"] <= 0:
+            active_id = "ending_burnout"
+            game_over = True
+            continue
+        elif (
+            stats["money"] <= 0
+            or stats["legal_status"] == "denied"
+            or stats["trust"] <= 0
+        ):
+            active_id = "ending_sent_home"
+            game_over = True
+            continue
 
     # do scenes
     active_scene = get_scene(active_id)
@@ -74,8 +92,9 @@ while True:
     clear_name = clean_string(active_scene["id"])
     text = active_scene["text"]
 
+    clear_screen()
     print("EXILE DIARIES: LOST IN TRANSLATION")
-    # print(f"Day {day} - ...")
+    # TODO: add day? print(f"Day {day} - ...")
     print(f"{clear_name} - [Unknown Country]")
 
     print(f"\n[{text}]")
@@ -87,19 +106,20 @@ while True:
         stat_name = clean_string(change)
 
         # is a string - legal status
+        # otherwise regular number stat
         if isinstance(stats[change], str):
             if stats[change] != stat_value:
                 print(f"[{stat_name}: {stats[change]} → {stat_value}]")
                 stats[change] = stat_value
-        # a number like regular
         else:
             print(f"[{'+' if stat_value > 0 else ''}{stat_value} {stat_name}]")
             stats[change] += stat_value
 
     if "ending" in active_scene.keys():
+        stats["legal_status"] = active_scene["legal_status"]
         break
 
-    # inventory?
+    # TODO: inventory?
 
     choices = active_scene["choices"]
 
@@ -113,3 +133,9 @@ while True:
 
     active_id = choices[choice]["next_scene"]
     stat_changes = choices[choice]["stat_changes"]
+
+print("\nThank you for playing!")
+print("Final stats:\n")
+
+for stat in stats:
+    print(f"{clean_string(stat)}: {stats[stat]}")
