@@ -1,6 +1,9 @@
 import os
+import sys
+import tty
 import json
 import time
+import termios
 import platform
 import builtins
 
@@ -76,6 +79,21 @@ def print(*args, color=None, **kwargs):
         builtins.print(msg, **kwargs)
     else:
         builtins.print(**kwargs)
+
+
+# get singular char
+def getch(prompt):
+    print(prompt, end="", flush=True)
+
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(fd)
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    print()
+    return ch
 
 
 active_id = "arrival"
@@ -188,7 +206,13 @@ while True:
         print(choice_text)
 
     # adjust for 0 index
-    choice = int(input("\n> ")) - 1
+    while True:
+        try:
+            choice = int(getch("\n> ")) - 1
+            if choice >= 0 and choice <= 3:
+                break
+        except:
+            continue
 
     active_id = choices[choice]["next_scene"]
     stat_changes = choices[choice]["stat_changes"]
