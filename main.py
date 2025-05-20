@@ -141,7 +141,8 @@ while True:
     stat_changes = choices[choice]["stat_changes"]
 
 print("\nThank you for playing!")
-print("Final stats:\n")
+print("\nFinal stats:")
 
+# show stats cleanly
 for stat in stats:
     print(f"{clean_string(stat)}: {stats[stat]}")

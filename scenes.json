@@ -7,17 +7,30 @@
         {
           "text": "Try to ask someone for directions using broken language.",
           "next_scene": "metro_confusion",
-          "stat_changes": { "language": 1, "trust": 1, "confidence": 1, "days": 1 }
+          "stat_changes": {
+            "language": 1,
+            "trust": 1,
+            "confidence": 1,
+            "days": 1
+          }
         },
         {
           "text": "Use your phone to find a map.",
           "next_scene": "wifi_search",
-          "stat_changes": { "battery": -20, "confidence": 1, "days": 1 }
+          "stat_changes": {
+            "battery": -20,
+            "confidence": 1,
+            "days": 1
+          }
         },
         {
           "text": "Wait around, hoping someone approaches you.",
           "next_scene": "missed_opportunity",
-          "stat_changes": { "confidence": -1, "mental_health": -1, "days": 1 }
+          "stat_changes": {
+            "confidence": -1,
+            "mental_health": -1,
+            "days": 1
+          }
         }
       ]
     },
@@ -28,12 +41,19 @@
         {
           "text": "Ask for help again.",
           "next_scene": "help_received",
-          "stat_changes": { "trust": 1, "language": 1, "days": 1 }
+          "stat_changes": {
+            "trust": 1,
+            "language": 1,
+            "days": 1
+          }
         },
         {
           "text": "Pretend you know what you're doing.",
           "next_scene": "get_lost",
-          "stat_changes": { "confidence": -1, "mental_health": -1 }
+          "stat_changes": {
+            "confidence": -1,
+            "mental_health": -1
+          }
         }
       ]
     },
@@ -44,12 +64,65 @@
         {
           "text": "Buy a coffee and use the Wi-Fi.",
           "next_scene": "online_translation",
-          "stat_changes": { "money": -1, "language": 1, "days": 1 }
+          "stat_changes": {
+            "money": -1,
+            "language": 1,
+            "days": 1
+          }
         },
         {
           "text": "Ask to use Wi-Fi without buying anything.",
           "next_scene": "rejected",
-          "stat_changes": { "confidence": -1, "trust": -1 }
+          "stat_changes": {
+            "confidence": -1,
+            "trust": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "rejected",
+      "text": "The barista frowns and shakes their head. \"Sorry, Wi-Fi only for customers.\" You feel embarrassed and leave the café.",
+      "choices": [
+        {
+          "text": "Buy a coffee after all.",
+          "next_scene": "online_translation",
+          "stat_changes": {
+            "money": -1,
+            "language": 1,
+            "days": 1
+          }
+        },
+        {
+          "text": "Look for another place with free Wi-Fi.",
+          "next_scene": "wifi_search",
+          "stat_changes": {
+            "battery": -5,
+            "confidence": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "online_translation",
+      "text": "With Wi-Fi and coffee, you use your phone to translate signs and directions. You find your way to the metro and feel a bit more confident.",
+      "choices": [
+        {
+          "text": "Head to your destination.",
+          "next_scene": "neighborhood_intro",
+          "stat_changes": {
+            "confidence": 1,
+            "days": 1
+          }
+        },
+        {
+          "text": "Call someone back home for advice.",
+          "next_scene": "neighborhood_intro",
+          "stat_changes": {
+            "trust": 1,
+            "mental_health": 1,
+            "battery": -10
+          }
         }
       ]
     },
@@ -60,12 +133,17 @@
         {
           "text": "Thank him and continue on your own.",
           "next_scene": "neighborhood_intro",
-          "stat_changes": { "confidence": 1 }
+          "stat_changes": {
+            "confidence": 1
+          }
         },
         {
           "text": "Ask if he knows someone renting a cheap place.",
           "next_scene": "find_shelter",
-          "stat_changes": { "trust": 1, "money": -1 }
+          "stat_changes": {
+            "trust": 1,
+            "money": -1
+          }
         }
       ]
     },
@@ -76,12 +154,18 @@
         {
           "text": "Join a traditional music class.",
           "next_scene": "culture_connection",
-          "stat_changes": { "cultural_identity": 2, "trust": 1 }
+          "stat_changes": {
+            "cultural_identity": 2,
+            "trust": 1
+          }
         },
         {
           "text": "Ignore it. Focus on finding a job.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": 1, "cultural_identity": -1 }
+          "stat_changes": {
+            "money": 1,
+            "cultural_identity": -1
+          }
         }
       ]
     },
@@ -92,12 +176,19 @@
         {
           "text": "Pay it to avoid trouble.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": -2, "mental_health": -1, "days": 7 }
+          "stat_changes": {
+            "money": -2,
+            "mental_health": -1,
+            "days": 7
+          }
         },
         {
           "text": "Refuse. Report it.",
           "next_scene": "legal_trouble",
-          "stat_changes": { "trust": -1, "legal_status": "pending" }
+          "stat_changes": {
+            "trust": -1,
+            "legal_status": "pending"
+          }
         }
       ]
     },
@@ -108,12 +199,20 @@
         {
           "text": "Keep trying and use Grandma’s phrasebook.",
           "next_scene": "language_boost",
-          "stat_changes": { "language": 2, "confidence": 1, "days": 14 }
+          "stat_changes": {
+            "language": 2,
+            "confidence": 1,
+            "days": 14
+          }
         },
         {
           "text": "Fake your experience and lie.",
           "next_scene": "underpaid_job",
-          "stat_changes": { "money": 2, "confidence": -1, "trust": -1 }
+          "stat_changes": {
+            "money": 2,
+            "confidence": -1,
+            "trust": -1
+          }
         }
       ]
     },
@@ -124,12 +223,17 @@
         {
           "text": "Form a WhatsApp group to help newcomers.",
           "next_scene": "build_community",
-          "stat_changes": { "trust": 2, "cultural_identity": 1 }
+          "stat_changes": {
+            "trust": 2,
+            "cultural_identity": 1
+          }
         },
         {
           "text": "Keep to yourself and just attend events.",
           "next_scene": "quiet_path",
-          "stat_changes": { "cultural_identity": 1 }
+          "stat_changes": {
+            "cultural_identity": 1
+          }
         }
       ]
     },
@@ -140,27 +244,29 @@
         {
           "text": "Apply to a community college for night classes.",
           "next_scene": "final_check",
-          "stat_changes": { "language": 1, "confidence": 1, "money": -1, "days": 30 }
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1,
+            "money": -1,
+            "days": 30
+          }
         },
         {
           "text": "Look for better jobs with new skills.",
           "next_scene": "final_check",
-          "stat_changes": { "money": 1, "confidence": 1 }
+          "stat_changes": {
+            "money": 1,
+            "confidence": 1
+          }
         }
       ]
     },
     {
       "id": "final_check",
       "text": "Months have passed. You reflect on where you are now. Your stats determine your ending.",
-      "choices": [
-        {
-          "text": "End Game",
-          "next_scene": "determine_ending",
-          "stat_changes": {}
-        }
-      ]
+      "ending": true,
+      "legal_status": "pending"
     },
-
     {
       "id": "legal_trouble",
       "text": "You report the shady landlord, but things escalate quickly. The authorities get involved, and your immigration status becomes a bigger issue. After a few days, you are detained and told to leave the country.\nOFFICER: \"You must come with us. There is a problem with your papers.\"",
@@ -168,12 +274,19 @@
         {
           "text": "Fight it out in court.",
           "next_scene": "ending_sent_home",
-          "stat_changes": { "trust": -2, "mental_health": -3, "days": 10 }
+          "stat_changes": {
+            "trust": -2,
+            "mental_health": -3,
+            "days": 10
+          }
         },
         {
           "text": "Give up and accept deportation.",
           "next_scene": "ending_sent_home",
-          "stat_changes": { "confidence": -2, "mental_health": -4 }
+          "stat_changes": {
+            "confidence": -2,
+            "mental_health": -4
+          }
         }
       ]
     },
@@ -184,12 +297,19 @@
         {
           "text": "Try to find another job immediately.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": 1, "mental_health": -2, "days": 30 }
+          "stat_changes": {
+            "money": 1,
+            "mental_health": -2,
+            "days": 30
+          }
         },
         {
           "text": "Give up and return to your home country.",
           "next_scene": "ending_sent_home",
-          "stat_changes": { "trust": -2, "mental_health": -4 }
+          "stat_changes": {
+            "trust": -2,
+            "mental_health": -4
+          }
         }
       ]
     },
@@ -200,12 +320,18 @@
         {
           "text": "Use the group’s resources to help you find better work.",
           "next_scene": "job_hunt",
-          "stat_changes": { "money": 2, "confidence": 1 }
+          "stat_changes": {
+            "money": 2,
+            "confidence": 1
+          }
         },
         {
           "text": "Focus more on building your own life and attend group meetings less.",
           "next_scene": "quiet_path",
-          "stat_changes": { "cultural_identity": 1, "trust": 2 }
+          "stat_changes": {
+            "cultural_identity": 1,
+            "trust": 2
+          }
         }
       ]
     },
@@ -216,12 +342,18 @@
         {
           "text": "Push yourself to engage more with people.",
           "next_scene": "build_community",
-          "stat_changes": { "trust": 2, "mental_health": -2 }
+          "stat_changes": {
+            "trust": 2,
+            "mental_health": -2
+          }
         },
         {
           "text": "Stick with your routine and avoid any more disruptions.",
           "next_scene": "final_check",
-          "stat_changes": { "mental_health": -1, "confidence": -1 }
+          "stat_changes": {
+            "mental_health": -1,
+            "confidence": -1
+          }
         }
       ]
     },
@@ -232,16 +364,22 @@
         {
           "text": "Try to find another opportunity later.",
           "next_scene": "final_check",
-          "stat_changes": { "mental_health": -2, "confidence": -1, "days": 1 }
+          "stat_changes": {
+            "mental_health": -2,
+            "confidence": -1,
+            "days": 1
+          }
         },
         {
           "text": "Give up on your new life here.",
           "next_scene": "ending_sent_home",
-          "stat_changes": { "mental_health": -3, "confidence": -3 }
+          "stat_changes": {
+            "mental_health": -3,
+            "confidence": -3
+          }
         }
       ]
-    },                
-
+    },
     {
       "id": "ending_bridge_builder",
       "text": "You’ve become a bridge for others. Fluent, connected, and proud of your roots.",
