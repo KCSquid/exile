@@ -839,9 +839,9 @@
     },
     {
       "id": "ending_bridge_builder",
-      "text": "You’ve become a bridge for others, ${name}. Fluent, connected, and proud of your roots.\nYou can now say: \"I am from...\" in both languages: ${language.introduce}",
+      "text": "You’ve become a bridge for others, ${name}. Fluent, connected, and proud of your roots.\nYou can now say: \"I am from...\" in both languages: ${language.from}",
       "ending": true,
-      "legal_status": "deported"
+      "legal_status": "approved"
     },
     {
       "id": "ending_hustler",

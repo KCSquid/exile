@@ -39,6 +39,7 @@ class Player:
             "battery": 50,
             "days": 0,
         }
+        self.text_speed = 15
 
     def getStat(self, name):
         return self.stats[name]
@@ -50,20 +51,39 @@ class Player:
         self.stats[name] += amount
 
 
+# constants
+OPTIONS_COUNTRIES = [
+    {"name": "Berlin, Germany", "code": "de"},
+    {"name": "Paris, France", "code": "fr"},
+    {"name": "Madrid, Spain", "code": "es"},
+]
+OPTIONS_COLORS = [Colors.YELLOW, Colors.CYAN, Colors.BLUE, Colors.PURPLE]
+OPTIONS_TEXT_SPEED = [
+    {"name": "FAST", "value": 5},
+    {"name": "MEDIUM", "value": 15},
+    {"name": "SLOW", "value": 30},
+    {"name": "INSTANT", "value": 0},
+]
+# global game settings
+active_id = "arrival"
+stat_changes = {}
+game_over = False
+player = Player()
+
 # read json into python object
 with open("scenes.json") as f:
     scenes = json.load(f)["scenes"]
 
 
 # search for id through scenes and return it
-def get_scene(name):
+def get_scene(name: str):
     for s in scenes:
         if s["id"] == name:
             return s
 
 
 # "_" -> " ", first letter capital + rest of letters, join by a space
-def clean_string(string):
+def clean_string(string: str):
     return " ".join([w[0].upper() + w[1:] for w in string.split("_")])
 
 
@@ -75,16 +95,16 @@ def clear_screen():
 
 
 # ms adjusted to my reading time-ish
-def typewrite(string, ms=15):
+def typewrite(string: str):
     for c in string:
         # flush to force showing it
         print(c, end="", flush=True)
-        time.sleep(ms / 1000)
+        time.sleep(player.text_speed / 1000)
     print()
 
 
 # edit std func print to show ANSI reset by default
-def print(*args, color=None, **kwargs):
+def print(*args, color: str = None, **kwargs):
     if args:
         msg = " ".join(str(a) for a in args)
         if color:
@@ -98,7 +118,7 @@ def print(*args, color=None, **kwargs):
 
 
 # get singular char
-def getch(prompt):
+def getch(prompt: str):
     print(prompt, end="", flush=True)
 
     fd = sys.stdin.fileno()
@@ -112,39 +132,43 @@ def getch(prompt):
     return ch
 
 
-active_id = "arrival"
+# sub lang keys
+def lang_sub(match):
+    key = match.group(1)
+    return language.get(key, f"<{key}>")
 
-stat_changes = {}
-game_over = False
 
-player = Player()
+def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
+    print("\n> OPTIONS")
+    for i in range(len(choices)):
+        choice_text = choices[i][key]
+        print(f"[{i + 1}]", color=OPTIONS_COLORS[i], end=" ")
+        print(choice_text)
 
+    while True:
+        try:
+            # adjust for 0 index
+            choice = int(getch("\n> ")) - 1
+            if choice >= 0 and choice <= len(choices) - 1:
+                break
+        except:
+            continue
+
+    return choice
+
+
+# get player info
 player.name = input("Welcome player! What's your name? ")
+
 print(f"Welcome, {player.name}! Which country would you like to live in?")
+country_choice = get_choice(OPTIONS_COUNTRIES, "name")
+player.country = OPTIONS_COUNTRIES[country_choice]["name"]
+player.language_code = OPTIONS_COUNTRIES[country_choice]["code"]
 
-choices = [
-    {"name": "Berlin, Germany", "code": "de"},
-    {"name": "Paris, France", "code": "fr"},
-    {"name": "Madrid, Spain", "code": "es"},
-]
-option_colors = [Colors.YELLOW, Colors.CYAN, Colors.BLUE, Colors.PURPLE]
-print("\n> OPTIONS")
-for i in range(len(choices)):
-    choice_text = choices[i]["name"]
-    print(f"[{i + 1}]", color=option_colors[i], end=" ")
-    print(choice_text)
+print("And what about your text speed?")
+text_speed_choice = get_choice(OPTIONS_TEXT_SPEED, "name")
+player.text_speed = OPTIONS_TEXT_SPEED[text_speed_choice]["value"]
 
-# adjust for 0 index
-while True:
-    try:
-        choice = int(getch("\n> ")) - 1
-        if choice >= 0 and choice <= len(choices) - 1:
-            break
-    except:
-        continue
-
-player.country = choices[choice]["name"]
-player.language_code = choices[choice]["code"]
 
 # after player.country set, load the language file
 language = {}
@@ -155,57 +179,48 @@ with open(f"./languages/{player.language_code}.json") as f:
 while True:
     # check if game over by stats
     if not game_over:
+        route = ""
+
         if (
             player.getStat("language") >= 7
             and player.getStat("trust") >= 6
             and player.getStat("cultural_identity") >= 5
         ):
-            active_id = "ending_bridge_builder"
-            game_over = True
-            continue
+            route = "ending_bridge_builder"
         elif (
             player.getStat("money") >= 8
             and player.getStat("confidence") >= 7
             and player.getStat("cultural_identity") <= 2
         ):
-            active_id = "ending_hustler"
-            game_over = True
-            continue
+            route = "ending_hustler"
         elif (
             player.getStat("cultural_identity") >= 7
             and player.getStat("language") >= 6
             and player.getStat("trust") >= 5
         ):
-            active_id = "ending_rooted"
-            game_over = True
-            continue
+            route = "ending_rooted"
         elif (
             player.getStat("mental_health") <= -2
             or player.getStat("confidence") <= -2
             or player.getStat("days") >= 120
         ):
-            active_id = "ending_burnout"
-            game_over = True
-            continue
+            route = "ending_burnout"
         elif (
             player.getStat("money") <= -2
             or player.getStat("legal_status") == "denied"
             or player.getStat("trust") <= -2
         ):
-            active_id = "ending_sent_home"
+            route = "ending_sent_home"
+
+        if route:
             game_over = True
             continue
 
-    # do scenes
+    # show scenes
     active_scene = get_scene(active_id)
 
     clear_name = clean_string(active_scene["id"])
     text = re.sub(r"\$\{name\}", player.name, active_scene["text"])
-
-    # sub lang keys
-    def lang_sub(match):
-        key = match.group(1)
-        return language.get(key, f"<{key}>")
 
     text = re.sub(r"\$\{language\.([a-zA-Z0-9_]+)\}", lang_sub, text)
     text = re.sub(r"\$\{name\}", f"_____ ({player.name})", text)
@@ -254,26 +269,10 @@ while True:
 
     # TODO: inventory?
 
-    choices = active_scene["choices"]
-
-    option_colors = [Colors.YELLOW, Colors.CYAN, Colors.BLUE, Colors.PURPLE]
-    print("\n> OPTIONS")
-    for i in range(len(choices)):
-        choice_text = choices[i]["text"]
-        print(f"[{i + 1}]", color=option_colors[i], end=" ")
-        print(choice_text)
-
-    # adjust for 0 index
-    while True:
-        try:
-            choice = int(getch("\n> ")) - 1
-            if choice >= 0 and choice <= 3:
-                break
-        except:
-            continue
-
-    active_id = choices[choice]["next_scene"]
-    stat_changes = choices[choice]["stat_changes"]
+    scene_choices = active_scene["choices"]
+    choice = get_choice(scene_choices, "text")
+    active_id = scene_choices[choice]["next_scene"]
+    stat_changes = scene_choices[choice]["stat_changes"]
 
 print("\nThank you for playing!")
 print("\nFinal stats:")
