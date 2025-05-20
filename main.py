@@ -5,6 +5,7 @@ import platform
 import builtins
 
 
+# ANSI codes
 class Colors:
     RED = "\033[91m"
     YELLOW = "\033[93m"
@@ -132,6 +133,10 @@ while True:
 
     clear_name = clean_string(active_scene["id"])
     text = active_scene["text"]
+
+    # update only days prematurely because it matters for info
+    if not game_over and "days" in stat_changes:
+        stats["days"] += stat_changes["days"]
 
     clear_screen()
     print("EXILE DIARIES: LOST IN TRANSLATION", color=Colors.UNDERLINE)
