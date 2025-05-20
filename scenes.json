@@ -2,7 +2,21 @@
   "scenes": [
     {
       "id": "arrival",
-      "text": "You land in a new country with nothing but a suitcase and a low-battery phone. You can't read the signs.\nYOU: \"Excuse me... uh... where is... metro?\"",
+      "text": "You land in a new country with nothing but a suitcase and a low-battery phone. You can't read the signs.\nYOU: \"Excuse me... uh... where is... metro?\"\nA sentence from Grandma's Phrasebook suggests: INTRODUCE YOURSELF",
+      "choices": [
+        {
+          "text": "Learn how to introduce yourself from the phrasebook.",
+          "next_scene": "arrival_introduced",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "arrival_introduced",
+      "text": "You practice introducing yourself using the phrasebook: ${language.introduce}\nA passerby smiles, now knowing your name. You feel a bit more confident.",
       "choices": [
         {
           "text": "Try to ask someone for directions using broken language.",
@@ -36,7 +50,21 @@
     },
     {
       "id": "metro_confusion",
-      "text": "You get vague directions and take the wrong train. A kind older man notices your struggle.\nYOU: \"Sorry, do you know which train goes to the center?\"\nOLD MAN: \"Ah, you are lost? Come, I show you.\"",
+      "text": "You get vague directions and take the wrong train. A kind older man notices your struggle.\nYOU: \"Sorry, do you know which train goes to the center?\"\nOLD MAN: \"Ah, you are lost? Come, I show you, ${name}.\"\nHe encourages you: ASK FOR HELP",
+      "choices": [
+        {
+          "text": "Learn how to ask for help from the phrasebook.",
+          "next_scene": "metro_confusion_learned_ask_help",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "metro_confusion_learned_ask_help",
+      "text": "You study the phrasebook and learn how to ask for help: ${language.ask_help}\nYou use it, and the old man smiles, understanding you better.",
       "choices": [
         {
           "text": "Ask for help again.",
@@ -59,7 +87,21 @@
     },
     {
       "id": "wifi_search",
-      "text": "You find a café with Wi-Fi, but they ask you to buy something first.\nBARISTA: \"You want Wi-Fi? You buy coffee, yes?\"",
+      "text": "You find a café with Wi-Fi, but they ask you to buy something first.\nBARISTA: \"You want Wi-Fi? You buy coffee, yes?\"\nYou remember: ORDER COFFEE",
+      "choices": [
+        {
+          "text": "Learn how to order coffee from the phrasebook.",
+          "next_scene": "wifi_search_learned_order_coffee",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "wifi_search_learned_order_coffee",
+      "text": "You check your phrasebook and learn how to order coffee: ${language.order_coffee}\nYou order confidently, and the barista nods approvingly.",
       "choices": [
         {
           "text": "Buy a coffee and use the Wi-Fi.",
@@ -128,7 +170,21 @@
     },
     {
       "id": "help_received",
-      "text": "The man helps you find your way and gives you tips for surviving the city.\nOLD MAN: \"Be careful, not everyone is friendly. But you will learn. Good luck!\"",
+      "text": "The man helps you find your way and gives you tips for surviving the city.\nOLD MAN: \"Be careful, not everyone is friendly. But you will learn, ${name}. Good luck!\"\nHe teaches you: THANK SOMEONE",
+      "choices": [
+        {
+          "text": "Learn how to thank someone from the phrasebook.",
+          "next_scene": "help_received_learned_thank_you",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "help_received_learned_thank_you",
+      "text": "You look up how to thank someone: ${language.thank_you}\nYou thank him in his language, and he beams at you.",
       "choices": [
         {
           "text": "Thank him and continue on your own.",
@@ -149,7 +205,21 @@
     },
     {
       "id": "neighborhood_intro",
-      "text": "You walk through a neighborhood that reminds you of home. A local cultural center invites you in.\nCENTER HOST: \"Come, join us! We have music and tea.\"",
+      "text": "You walk through a neighborhood that reminds you of home. A local cultural center invites you in.\nCENTER HOST: \"Come, join us, ${name}! We have music and tea.\"\nYou see a sign: WELCOME",
+      "choices": [
+        {
+          "text": "Learn how to say welcome from the phrasebook.",
+          "next_scene": "neighborhood_intro_learned_welcome",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "neighborhood_intro_learned_welcome",
+      "text": "You learn how to say welcome: ${language.welcome}\nYou greet the host in their language, and they smile warmly.",
       "choices": [
         {
           "text": "Join a traditional music class.",
@@ -194,7 +264,21 @@
     },
     {
       "id": "job_hunt",
-      "text": "You apply for cleaning and delivery jobs. Interviews go badly due to language barriers.\nINTERVIEWER: \"Sorry, your language... not enough. Maybe next time.\"",
+      "text": "You apply for cleaning and delivery jobs. Interviews go badly due to language barriers.\nINTERVIEWER: \"Sorry, your language... not enough. Maybe next time.\"\nYou practice: TALK ABOUT EXPERIENCE",
+      "choices": [
+        {
+          "text": "Learn how to talk about experience from the phrasebook.",
+          "next_scene": "job_hunt_learned_experience",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "job_hunt_learned_experience",
+      "text": "You study the phrasebook and learn how to talk about your experience: ${language.experience}\nYou feel more prepared for your next interview.",
       "choices": [
         {
           "text": "Keep trying and use Grandma’s phrasebook.",
@@ -213,12 +297,36 @@
             "confidence": -1,
             "trust": -1
           }
+        },
+        {
+          "text": "Volunteer at a local charity to gain experience.",
+          "next_scene": "volunteer_experience",
+          "stat_changes": {
+            "trust": 1,
+            "confidence": 1,
+            "language": 1,
+            "days": 7
+          }
         }
       ]
     },
     {
       "id": "culture_connection",
-      "text": "You learn new things about your own roots and meet others from your homeland.\nNEW FRIEND: \"We meet every week. You should come!\"",
+      "text": "You learn new things about your own roots and meet others from your homeland.\nNEW FRIEND: \"We meet every week, ${name}. You should come!\"\nAt the event, you practice: GREET SOMEONE",
+      "choices": [
+        {
+          "text": "Learn how to greet someone from the phrasebook.",
+          "next_scene": "culture_connection_learned_greet",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "culture_connection_learned_greet",
+      "text": "You learn how to greet someone: ${language.greet}\nYou greet your new friend, and they are delighted.",
       "choices": [
         {
           "text": "Form a WhatsApp group to help newcomers.",
@@ -243,7 +351,7 @@
       "choices": [
         {
           "text": "Apply to a community college for night classes.",
-          "next_scene": "final_check",
+          "next_scene": "education_path",
           "stat_changes": {
             "language": 1,
             "confidence": 1,
@@ -253,10 +361,54 @@
         },
         {
           "text": "Look for better jobs with new skills.",
-          "next_scene": "final_check",
+          "next_scene": "better_job_search",
           "stat_changes": {
             "money": 1,
             "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "education_path",
+      "text": "You enroll in night classes and meet people from all over the world. Your language and confidence grow.",
+      "choices": [
+        {
+          "text": "Graduate and apply for skilled jobs.",
+          "next_scene": "ending_hustler",
+          "stat_changes": {
+            "money": 2,
+            "confidence": 2,
+            "language": 1
+          }
+        },
+        {
+          "text": "Help classmates with their studies.",
+          "next_scene": "build_community",
+          "stat_changes": {
+            "trust": 2,
+            "cultural_identity": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "better_job_search",
+      "text": "With improved language skills, you apply for better jobs and get an interview at a tech company.",
+      "choices": [
+        {
+          "text": "Ace the interview and get the job.",
+          "next_scene": "ending_hustler",
+          "stat_changes": {
+            "money": 3,
+            "confidence": 2
+          }
+        },
+        {
+          "text": "Struggle with technical questions and look for other opportunities.",
+          "next_scene": "job_hunt",
+          "stat_changes": {
+            "confidence": -1
           }
         }
       ]
@@ -310,12 +462,152 @@
             "trust": -2,
             "mental_health": -4
           }
+        },
+        {
+          "text": "Ask a coworker for advice or help.",
+          "next_scene": "coworker_help",
+          "stat_changes": {
+            "trust": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "coworker_help",
+      "text": "Your coworker sympathizes and offers to introduce you to a friend who knows about better jobs.\nCOWORKER: \"My cousin works at a restaurant. Maybe they need help, ${name}.\"",
+      "choices": [
+        {
+          "text": "Meet the cousin and try for a restaurant job.",
+          "next_scene": "restaurant_trial",
+          "stat_changes": {
+            "money": 1,
+            "confidence": 1,
+            "days": 7
+          }
+        },
+        {
+          "text": "Thank them but look for jobs on your own.",
+          "next_scene": "job_hunt",
+          "stat_changes": {
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "restaurant_trial",
+      "text": "You get a trial shift at the restaurant. The work is fast-paced, but you manage to keep up. The boss seems impressed. \"${name}, you work hard!\"\nA coworker teaches you: ASK FOR BREAK: ${language.ask_break}",
+      "choices": [
+        {
+          "text": "Learn how to ask for a break from the phrasebook.",
+          "next_scene": "restaurant_trial_learned_ask_break",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "restaurant_trial_learned_ask_break",
+      "text": "You learn how to ask for a break: ${language.ask_break}\nYou use it, and your coworker nods approvingly.",
+      "choices": [
+        {
+          "text": "Accept the job offer and start working.",
+          "next_scene": "restaurant_job",
+          "stat_changes": {
+            "money": 2,
+            "confidence": 1,
+            "days": 30
+          }
+        },
+        {
+          "text": "Decline and keep searching for something better.",
+          "next_scene": "job_hunt",
+          "stat_changes": {
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "restaurant_job",
+      "text": "You work at the restaurant for a month. The pay is better, and you pick up more of the local language from coworkers. \"${name}, you’re part of the team now,\" says your boss.\nYou learn: SAY GOOD JOB: ${language.good_job}",
+      "choices": [
+        {
+          "text": "Learn how to say good job from the phrasebook.",
+          "next_scene": "restaurant_job_learned_good_job",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "restaurant_job_learned_good_job",
+      "text": "You learn how to say good job: ${language.good_job}\nYou say it to your coworkers, and they cheer you on.",
+      "choices": [
+        {
+          "text": "Ask for a raise.",
+          "next_scene": "raise_request",
+          "stat_changes": {
+            "confidence": 1
+          }
+        },
+        {
+          "text": "Save money and enroll in a language course.",
+          "next_scene": "language_boost",
+          "stat_changes": {
+            "money": -1,
+            "language": 2,
+            "days": 30
+          }
+        }
+      ]
+    },
+    {
+      "id": "raise_request",
+      "text": "You ask for a raise. The boss hesitates but agrees to a small increase if you take on extra responsibilities.",
+      "choices": [
+        {
+          "text": "Accept the extra work for more pay.",
+          "next_scene": "ending_hustler",
+          "stat_changes": {
+            "money": 2,
+            "confidence": 1,
+            "mental_health": -1,
+            "days": 30
+          }
+        },
+        {
+          "text": "Refuse and look for another job.",
+          "next_scene": "job_hunt",
+          "stat_changes": {
+            "confidence": 1,
+            "mental_health": 1
+          }
         }
       ]
     },
     {
       "id": "build_community",
-      "text": "You start a small support group for newcomers and people struggling with the same challenges. Slowly, you build a network of people who help each other with housing, jobs, and emotional support.\nGROUP MEMBER: \"Thank you for helping me find a place. I couldn't have done it alone.\"",
+      "text": "You start a small support group for newcomers and people struggling with the same challenges. Slowly, you build a network of people who help each other with housing, jobs, and emotional support.\nGROUP MEMBER: \"Thank you, ${name}, for helping me find a place. I couldn't have done it alone.\"\nYou teach newcomers: HOW TO ASK FOR DIRECTIONS: ${language.ask_directions}",
+      "choices": [
+        {
+          "text": "Learn how to ask for directions from the phrasebook.",
+          "next_scene": "build_community_learned_ask_directions",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "build_community_learned_ask_directions",
+      "text": "You teach newcomers how to ask for directions: ${language.ask_directions}\nThey thank you for your help.",
       "choices": [
         {
           "text": "Use the group’s resources to help you find better work.",
@@ -331,6 +623,73 @@
           "stat_changes": {
             "cultural_identity": 1,
             "trust": 2
+          }
+        },
+        {
+          "text": "Organize a cultural festival to bring locals and newcomers together.",
+          "next_scene": "festival_event",
+          "stat_changes": {
+            "cultural_identity": 2,
+            "trust": 2,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "festival_event",
+      "text": "The festival is a success! Locals and newcomers mingle, share food, and dance. You feel a sense of belonging, ${name}.\nYou hear a song chorus: SING ALONG: ${language.sing_along}",
+      "choices": [
+        {
+          "text": "Learn how to sing along from the phrasebook.",
+          "next_scene": "festival_event_learned_sing_along",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "festival_event_learned_sing_along",
+      "text": "You learn the chorus: ${language.sing_along}\nYou sing along, and everyone joins in.",
+      "choices": [
+        {
+          "text": "Use your new connections to advocate for immigrant rights.",
+          "next_scene": "advocacy_path",
+          "stat_changes": {
+            "trust": 2,
+            "confidence": 2
+          }
+        },
+        {
+          "text": "Celebrate quietly and focus on your personal goals.",
+          "next_scene": "ending_rooted",
+          "stat_changes": {
+            "mental_health": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "advocacy_path",
+      "text": "You become a community leader, helping others navigate the system and pushing for fairer treatment. People start to recognize ${name} as a voice for newcomers.",
+      "choices": [
+        {
+          "text": "Continue advocacy and run for a local council position.",
+          "next_scene": "ending_bridge_builder",
+          "stat_changes": {
+            "confidence": 2,
+            "trust": 2,
+            "cultural_identity": 2
+          }
+        },
+        {
+          "text": "Step back and let others lead while you focus on your career.",
+          "next_scene": "job_hunt",
+          "stat_changes": {
+            "confidence": 1
           }
         }
       ]
@@ -349,10 +708,84 @@
         },
         {
           "text": "Stick with your routine and avoid any more disruptions.",
-          "next_scene": "final_check",
+          "next_scene": "ending_burnout",
           "stat_changes": {
             "mental_health": -1,
             "confidence": -1
+          }
+        },
+        {
+          "text": "Adopt a pet for companionship.",
+          "next_scene": "pet_companion",
+          "stat_changes": {
+            "mental_health": 2,
+            "confidence": 1,
+            "money": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "pet_companion",
+      "text": "You adopt a small pet. Its presence lifts your spirits and helps you feel less alone. The shelter staff smile: \"${name}, this little one will be your friend now.\"",
+      "choices": [
+        {
+          "text": "Join a local pet owner group.",
+          "next_scene": "build_community",
+          "stat_changes": {
+            "trust": 1,
+            "confidence": 1
+          }
+        },
+        {
+          "text": "Focus on your daily routine with your new companion.",
+          "next_scene": "ending_rooted",
+          "stat_changes": {
+            "mental_health": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "volunteer_experience",
+      "text": "You volunteer at a local charity, helping others and improving your language skills. The staff appreciate your effort. \"${name}, you make a real difference here,\" they say.\nYou help translate: HELP SOMEONE",
+      "choices": [
+        {
+          "text": "Learn how to help someone from the phrasebook.",
+          "next_scene": "volunteer_experience_learned_help_someone",
+          "stat_changes": {
+            "language": 1,
+            "confidence": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "volunteer_experience_learned_help_someone",
+      "text": "You learn how to help someone: ${language.help_someone}\nYou use the phrase to assist others.",
+      "choices": [
+        {
+          "text": "Ask for a reference to help with job applications.",
+          "next_scene": "language_boost",
+          "stat_changes": {
+            "confidence": 1,
+            "trust": 1
+          }
+        },
+        {
+          "text": "Continue volunteering and make new friends.",
+          "next_scene": "build_community",
+          "stat_changes": {
+            "trust": 2,
+            "cultural_identity": 1
+          }
+        },
+        {
+          "text": "Start your own small charity project.",
+          "next_scene": "advocacy_path",
+          "stat_changes": {
+            "trust": 2,
+            "confidence": 1
           }
         }
       ]
@@ -363,7 +796,7 @@
       "choices": [
         {
           "text": "Try to find another opportunity later.",
-          "next_scene": "final_check",
+          "next_scene": "job_hunt",
           "stat_changes": {
             "mental_health": -2,
             "confidence": -1,
@@ -406,19 +839,19 @@
     },
     {
       "id": "ending_bridge_builder",
-      "text": "You’ve become a bridge for others. Fluent, connected, and proud of your roots.",
+      "text": "You’ve become a bridge for others, ${name}. Fluent, connected, and proud of your roots.\nYou can now say: \"I am from...\" in both languages: ${language.introduce}",
       "ending": true,
       "legal_status": "deported"
     },
     {
       "id": "ending_hustler",
-      "text": "You've made it. Good job, good money — but sometimes you wonder what you left behind.",
+      "text": "You've made it, ${name}. Good job, good money — but sometimes you wonder what you left behind.\nYou remember your first phrase: THANK SOMEONE: ${language.thank_you}",
       "ending": true,
       "legal_status": "approved"
     },
     {
       "id": "ending_rooted",
-      "text": "You’ve built a life and brought your people with you. The old and new now live inside you.",
+      "text": "You’ve built a life and brought your people with you, ${name}. The old and new now live inside you.\nYou teach your friends: GREET SOMEONE: ${language.greet}",
       "ending": true,
       "legal_status": "approved"
     },

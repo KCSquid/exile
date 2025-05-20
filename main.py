@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import tty
 import json
@@ -21,18 +22,33 @@ class Colors:
     UNDERLINE = "\033[4m"
 
 
-# stats as obj to make easy to change
-stats = {
-    "language": 3,
-    "money": 3,
-    "mental_health": 3,
-    "trust": 3,
-    "cultural_identity": 3,
-    "confidence": 3,
-    "legal_status": "pending",
-    "battery": 50,
-    "days": 0,
-}
+# player as class to make easy to change
+class Player:
+    def __init__(self):
+        self.name = ""
+        self.country = ""
+        self.language_code = ""
+        self.stats = {
+            "language": 3,
+            "money": 3,
+            "mental_health": 3,
+            "trust": 3,
+            "cultural_identity": 3,
+            "confidence": 3,
+            "legal_status": "pending",
+            "battery": 50,
+            "days": 0,
+        }
+
+    def getStat(self, name):
+        return self.stats[name]
+
+    def setStat(self, name, value):
+        self.stats[name] = value
+
+    def editStat(self, name, amount):
+        self.stats[name] += amount
+
 
 # read json into python object
 with open("scenes.json") as f:
@@ -101,46 +117,80 @@ active_id = "arrival"
 stat_changes = {}
 game_over = False
 
+player = Player()
+
+player.name = input("Welcome player! What's your name? ")
+print(f"Welcome, {player.name}! Which country would you like to live in?")
+
+choices = [
+    {"name": "Berlin, Germany", "code": "de"},
+    {"name": "Paris, France", "code": "fr"},
+    {"name": "Madrid, Spain", "code": "es"},
+]
+option_colors = [Colors.YELLOW, Colors.CYAN, Colors.BLUE, Colors.PURPLE]
+print("\n> OPTIONS")
+for i in range(len(choices)):
+    choice_text = choices[i]["name"]
+    print(f"[{i + 1}]", color=option_colors[i], end=" ")
+    print(choice_text)
+
+# adjust for 0 index
+while True:
+    try:
+        choice = int(getch("\n> ")) - 1
+        if choice >= 0 and choice <= len(choices) - 1:
+            break
+    except:
+        continue
+
+player.country = choices[choice]["name"]
+player.language_code = choices[choice]["code"]
+
+# after player.country set, load the language file
+language = {}
+with open(f"{player.language_code}.json") as f:
+    language = json.load(f)
+
 # game loop
 while True:
     # check if game over by stats
     if not game_over:
         if (
-            stats["language"] >= 7
-            and stats["trust"] >= 6
-            and stats["cultural_identity"] >= 5
+            player.getStat("language") >= 7
+            and player.getStat("trust") >= 6
+            and player.getStat("cultural_identity") >= 5
         ):
             active_id = "ending_bridge_builder"
             game_over = True
             continue
         elif (
-            stats["money"] >= 8
-            and stats["confidence"] >= 7
-            and stats["cultural_identity"] <= 2
+            player.getStat("money") >= 8
+            and player.getStat("confidence") >= 7
+            and player.getStat("cultural_identity") <= 2
         ):
             active_id = "ending_hustler"
             game_over = True
             continue
         elif (
-            stats["cultural_identity"] >= 7
-            and stats["language"] >= 6
-            and stats["trust"] >= 5
+            player.getStat("cultural_identity") >= 7
+            and player.getStat("language") >= 6
+            and player.getStat("trust") >= 5
         ):
             active_id = "ending_rooted"
             game_over = True
             continue
         elif (
-            stats["mental_health"] <= 0
-            or stats["confidence"] <= 0
-            or stats["days"] >= 90
+            player.getStat("mental_health") <= -2
+            or player.getStat("confidence") <= -2
+            or player.getStat("days") >= 120
         ):
             active_id = "ending_burnout"
             game_over = True
             continue
         elif (
-            stats["money"] <= 0
-            or stats["legal_status"] == "denied"
-            or stats["trust"] <= 0
+            player.getStat("money") <= -2
+            or player.getStat("legal_status") == "denied"
+            or player.getStat("trust") <= -2
         ):
             active_id = "ending_sent_home"
             game_over = True
@@ -150,16 +200,24 @@ while True:
     active_scene = get_scene(active_id)
 
     clear_name = clean_string(active_scene["id"])
-    text = active_scene["text"]
+    text = re.sub(r"\$\{name\}", player.name, active_scene["text"])
+
+    # sub lang keys
+    def lang_sub(match):
+        key = match.group(1)
+        return language.get(key, f"<{key}>")
+
+    text = re.sub(r"\$\{language\.([a-zA-Z0-9_]+)\}", lang_sub, text)
+    text = re.sub(r"\$\{name\}", f"_____ ({player.name})", text)
 
     # update only days prematurely because it matters for info
     if not game_over and "days" in stat_changes:
-        stats["days"] += stat_changes["days"]
+        player.editStat("days", stat_changes["days"])
 
     clear_screen()
-    print("EXILE DIARIES: LOST IN TRANSLATION", color=Colors.UNDERLINE)
-    print(f"Day {stats["days"] + 1}")
-    print(f"{clear_name} - [Unknown Country]")
+    print("EXILE: LOST IN TRANSLATION", color=Colors.UNDERLINE)
+    print(f"Day {player.getStat("days") + 1}")
+    print(f"{clear_name} - {player.country}")
 
     print()
     dialogue = text.split("\n")
@@ -174,10 +232,10 @@ while True:
 
         # is a string - legal status
         # otherwise regular number stat
-        if isinstance(stats[change], str):
-            if stats[change] != stat_value:
-                print(f"[{stat_name}: {stats[change]} → {stat_value}]")
-                stats[change] = stat_value
+        if isinstance(player.getStat(change), str):
+            if player.getStat(change) != stat_value:
+                print(f"[{stat_name}: {player.getStat(change)} → {stat_value}]")
+                player.setStat(change, stat_value)
         else:
             positive = stat_value > 0
             corresponding_color = Colors.GREEN if positive else Colors.RED
@@ -188,10 +246,10 @@ while True:
                 end=" ",
             )
             print(f"{stat_name}]")
-            stats[change] += stat_value
+            player.editStat(change, stat_value)
 
     if "ending" in active_scene.keys():
-        stats["legal_status"] = active_scene["legal_status"]
+        player.setStat("legal_status", active_scene["legal_status"])
         break
 
     # TODO: inventory?
@@ -221,5 +279,5 @@ print("\nThank you for playing!")
 print("\nFinal stats:")
 
 # show stats cleanly
-for stat in stats:
-    typewrite(f"{clean_string(stat)}: {stats[stat]}")
+for stat in player.stats:
+    typewrite(f"{clean_string(stat)}: {player.getStat(stat)}")

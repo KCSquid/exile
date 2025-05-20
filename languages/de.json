@@ -1,0 +1,14 @@
+{
+  "introduce": "Hallo, ich heiße ${name}.",
+  "ask_help": "Können Sie mir bitte helfen?",
+  "order_coffee": "Ich hätte gerne einen Kaffee, bitte.",
+  "thank_you": "Danke schön!",
+  "welcome": "Willkommen!",
+  "greet": "Guten Tag!",
+  "experience": "Ich habe Erfahrung als ...",
+  "ask_break": "Darf ich eine Pause machen?",
+  "good_job": "Gute Arbeit!",
+  "ask_directions": "Wie komme ich zum/zur ...?",
+  "sing_along": "Sing mit uns!",
+  "help_someone": "Kann ich Ihnen helfen?"
+}
