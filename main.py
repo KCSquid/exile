@@ -148,7 +148,7 @@ player.language_code = choices[choice]["code"]
 
 # after player.country set, load the language file
 language = {}
-with open(f"{player.language_code}.json") as f:
+with open(f"./languages/{player.language_code}.json") as f:
     language = json.load(f)
 
 # game loop
