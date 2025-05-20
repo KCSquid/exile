@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import platform
 
 # stats as obj to make easy to change
@@ -37,6 +38,15 @@ def clear_screen():
         os.system("cls")
     else:
         os.system("clear")
+
+
+# ms adjusted to my reading time-ish
+def typewrite(string, ms=15):
+    for c in string:
+        # flush to force showing it
+        print(c, end="", flush=True)
+        time.sleep(ms / 1000)
+    print()
 
 
 active_id = "arrival"
@@ -103,7 +113,7 @@ while True:
     print()
     dialogue = text.split("\n")
     for message in dialogue:
-        print(f"[{message}]")
+        typewrite(f"[{message}]")
 
     if len(stat_changes.keys()) > 0:
         print()
@@ -145,4 +155,4 @@ print("\nFinal stats:")
 
 # show stats cleanly
 for stat in stats:
-    print(f"{clean_string(stat)}: {stats[stat]}")
+    typewrite(f"{clean_string(stat)}: {stats[stat]}")

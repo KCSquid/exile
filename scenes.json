@@ -381,6 +381,30 @@
       ]
     },
     {
+      "id": "get_lost",
+      "text": "You pretend to know what you're doing, but soon realize you're completely lost. The city feels overwhelming and you start to panic.",
+      "choices": [
+        {
+          "text": "Ask someone else for help.",
+          "next_scene": "help_received",
+          "stat_changes": {
+            "trust": 1,
+            "confidence": 1,
+            "days": 1
+          }
+        },
+        {
+          "text": "Wander around hoping to find your way.",
+          "next_scene": "missed_opportunity",
+          "stat_changes": {
+            "mental_health": -1,
+            "confidence": -1,
+            "days": 1
+          }
+        }
+      ]
+    },
+    {
       "id": "ending_bridge_builder",
       "text": "You’ve become a bridge for others. Fluent, connected, and proud of your roots.",
       "ending": true,
