@@ -2,6 +2,20 @@ import os
 import json
 import time
 import platform
+import builtins
+
+
+class Colors:
+    RED = "\033[91m"
+    YELLOW = "\033[93m"
+    GREEN = "\033[92m"
+    CYAN = "\033[96m"
+    BLUE = "\033[94m"
+    PURPLE = "\033[95m"
+    END = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
 
 # stats as obj to make easy to change
 stats = {
@@ -47,6 +61,20 @@ def typewrite(string, ms=15):
         print(c, end="", flush=True)
         time.sleep(ms / 1000)
     print()
+
+
+# edit std func print to show ANSI reset by default
+def print(*args, color=None, **kwargs):
+    if args:
+        msg = " ".join(str(a) for a in args)
+        if color:
+            msg = f"{color}{msg}{Colors.END}"
+        # prevent dupes
+        elif not msg.endswith(Colors.END):
+            msg += Colors.END
+        builtins.print(msg, **kwargs)
+    else:
+        builtins.print(**kwargs)
 
 
 active_id = "arrival"
@@ -106,7 +134,7 @@ while True:
     text = active_scene["text"]
 
     clear_screen()
-    print("EXILE DIARIES: LOST IN TRANSLATION")
+    print("EXILE DIARIES: LOST IN TRANSLATION", color=Colors.UNDERLINE)
     print(f"Day {stats["days"] + 1}")
     print(f"{clear_name} - [Unknown Country]")
 
@@ -128,7 +156,15 @@ while True:
                 print(f"[{stat_name}: {stats[change]} → {stat_value}]")
                 stats[change] = stat_value
         else:
-            print(f"[{'+' if stat_value > 0 else ''}{stat_value} {stat_name}]")
+            positive = stat_value > 0
+            corresponding_color = Colors.GREEN if positive else Colors.RED
+            print("[", end="")
+            print(
+                f"{'+' if positive else ''}{stat_value}",
+                color=corresponding_color,
+                end=" ",
+            )
+            print(f"{stat_name}]")
             stats[change] += stat_value
 
     if "ending" in active_scene.keys():
@@ -139,10 +175,12 @@ while True:
 
     choices = active_scene["choices"]
 
+    option_colors = [Colors.YELLOW, Colors.CYAN, Colors.BLUE, Colors.PURPLE]
     print("\n> OPTIONS")
     for i in range(len(choices)):
         choice_text = choices[i]["text"]
-        print(f"[{i + 1}] {choice_text}")
+        print(f"[{i + 1}]", color=option_colors[i], end=" ")
+        print(choice_text)
 
     # adjust for 0 index
     choice = int(input("\n> ")) - 1
