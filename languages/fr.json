@@ -12,9 +12,11 @@
   "sing_along": "Chante avec nous !",
   "help_someone": "Puis-je vous aider ?",
   "from": "Je viens de ...",
-  "cultural_fact_1": "France is famous for its cuisine, including cheese, wine, and pastries.",
-  "cultural_fact_2": "The Eiffel Tower in Paris is one of the most visited monuments in the world.",
-  "cultural_fact_3": "France has the most time zones of any country in the world.",
-  "cultural_fact_4": "The French Revolution began in 1789 and changed the course of history.",
-  "cultural_fact_5": "Bastille Day, celebrated on July 14th, is France's national holiday."
+  "cultural_facts": [
+    "France is famous for its cuisine, including cheese, wine, and pastries.",
+    "The Eiffel Tower in Paris is one of the most visited monuments in the world.",
+    "France has the most time zones of any country in the world.",
+    "The French Revolution began in 1789 and changed the course of history.",
+    "Bastille Day, celebrated on July 14th, is France's national holiday."
+  ]
 }

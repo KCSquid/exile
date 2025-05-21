@@ -1,0 +1,27 @@
+{
+  "introduce": "Yo fam, I'm ${name} still — you dun know.",
+  "ask_help": "Yo, can you gimme a hand real quick? Man's stressin'.",
+  "order_coffee": "Lemme grab a coffee still — need that.",
+  "thank_you": "Safe g, you’re actually blessed.",
+  "welcome": "Aight, you’re calm. Come tru!",
+  "greet": "Wagwan broski!",
+  "experience": "I been holdin’ it down as a ... ya feel me?",
+  "ask_break": "Yo bossman, can I cut for a quick break? Man’s tired still.",
+  "good_job": "You’re movin proper still — good looks!",
+  "ask_directions": "Yo, how do I reach ... from here fam?",
+  "sing_along": "Yo, run that tune — man’s tryna vibe too!",
+  "help_someone": "You need help or nah? You lookin’ kinda lost still.",
+  "from": "I’m from the ends — outta ...",
+  "cultural_facts": [
+    "Tdot's a whole vibe — bare cultures mixin' here, no cap.",
+    "CN Tower? That’s the tall ting downtown. Tourists love it, but locals barely look at it lmao.",
+    "Caribana’s a movie every summer — the city gets too live, fam.",
+    "You’ll hear bare accents in Toronto — Jamaican, Somali, Punjabi, everything — man’s multilingual by default.",
+    "We don’t play when it comes to food. Shawarma, patties, jerk, pho — it’s all here and it’s all fire.",
+    "Toronto slang is diff — if you know, you know. Man’s can say 'you’re blessed' and that’s a full sentence.",
+    "Drizzy (Drake) really put The 6 on the map — now everybody wanna claim Toronto.",
+    "Weather’s mad bipolar here — snow in the morning, sun in the afternoon, hoodie n shorts type beat.",
+    "Subway barely goes anywhere but somehow it’s always packed — TTC moves stress sometimes.",
+    "You say ‘I’m from Toronto’ but you really mean Scarbs, Brampton, Mississauga, or like, Ajax still."
+  ]
+}

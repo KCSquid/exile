@@ -1,0 +1,22 @@
+{
+  "introduce": "Wah gwaan, mi name a ${name}.",
+  "ask_help": "Yuh can help mi, please?",
+  "order_coffee": "Mi woulda like a cup a coffee, please.",
+  "thank_you": "Nuff respect!",
+  "welcome": "Bless up!",
+  "greet": "Wah gwaan!",
+  "experience": "Mi have experience as ...",
+  "ask_break": "Mi can tek a likkle break?",
+  "good_job": "Good job, mi boss!",
+  "ask_directions": "Ow mi reach ...?",
+  "sing_along": "Come sing wid wi!",
+  "help_someone": "Mi can help yuh?",
+  "from": "Mi come from ...",
+  "cultural_facts": [
+    "Jamaica is the birthplace of reggae music and Bob Marley.",
+    "Ackee and saltfish is Jamaica's national dish.",
+    "The Blue Mountains in Jamaica are famous for their coffee.",
+    "Jamaica was the first Caribbean nation to gain independence in 1962.",
+    "Usain Bolt, the fastest man in the world, is Jamaican."
+  ]
+}

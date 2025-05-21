@@ -1,0 +1,22 @@
+{
+  "introduce": "Привіт, мене звати ${name}.",
+  "ask_help": "Ви можете мені допомогти, будь ласка?",
+  "order_coffee": "Я хотів би каву, будь ласка.",
+  "thank_you": "Дуже дякую!",
+  "welcome": "Ласкаво просимо!",
+  "greet": "Добрий день!",
+  "experience": "Я маю досвід як ...",
+  "ask_break": "Можна мені зробити перерву?",
+  "good_job": "Гарна робота!",
+  "ask_directions": "Як мені пройти до ...?",
+  "sing_along": "Співай з нами!",
+  "help_someone": "Чи можу я вам допомогти?",
+  "from": "Я з ...",
+  "cultural_facts": [
+    "Ukraine is the largest country entirely in Europe.",
+    "Kyiv is the capital and largest city of Ukraine.",
+    "Ukraine is known for its fertile black soil.",
+    "Borscht is a traditional Ukrainian dish.",
+    "The Carpathians are picturesque mountains in western Ukraine."
+  ]
+}
