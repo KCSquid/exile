@@ -38,6 +38,7 @@ class Player:
             "legal_status": "pending",
             "battery": 50,
             "days": 0,
+            "cultural_knowledge": 0,
         }
         self.text_speed = 15
 
@@ -118,17 +119,21 @@ def print(*args, color: str = None, **kwargs):
 
 
 # get singular char
-def getch(prompt: str):
-    print(prompt, end="", flush=True)
+def getch(prompt: str = ""):
+    if prompt:
+        print(prompt, end="", flush=True)
 
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
         tty.setraw(fd)
+        # disable echo so it doesn't show \n or stuff
+        new_settings = termios.tcgetattr(fd)
+        new_settings[3] = new_settings[3] & ~termios.ECHO
+        termios.tcsetattr(fd, termios.TCSADRAIN, new_settings)
         ch = sys.stdin.read(1)
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    print()
     return ch
 
 
@@ -145,10 +150,15 @@ def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
         print(f"[{i + 1}]", color=OPTIONS_COLORS[i], end=" ")
         print(choice_text)
 
+    print("\n> ", end="")
     while True:
         try:
             # adjust for 0 index
-            choice = int(getch("\n> ")) - 1
+            char_input = getch()
+            if char_input == "q":
+                print("'q' Detected, quitting... Thank you for playing!")
+                exit(0)
+            choice = int(char_input) - 1
             if choice >= 0 and choice <= len(choices) - 1:
                 break
         except:
@@ -158,7 +168,9 @@ def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
 
 
 # get player info
-player.name = input("Welcome player! What's your name? ")
+dirtyName = input("Welcome player! What's your name? ")
+dirtyName = dirtyName[0].upper() + dirtyName[1:]
+player.name = dirtyName
 
 print(f"Welcome, {player.name}! Which country would you like to live in?")
 country_choice = get_choice(OPTIONS_COUNTRIES, "name")
@@ -174,6 +186,11 @@ player.text_speed = OPTIONS_TEXT_SPEED[text_speed_choice]["value"]
 language = {}
 with open(f"./languages/{player.language_code}.json") as f:
     language = json.load(f)
+
+cultural_facts = []
+for key in language:
+    if key.startswith("cultural_fact_"):
+        cultural_facts.append(language[key])
 
 # game loop
 while True:
@@ -215,6 +232,14 @@ while True:
         if route:
             game_over = True
             continue
+
+    fact_threshold = 6 - len(cultural_facts)
+    if player.getStat("cultural_knowledge") == fact_threshold and fact_threshold <= 5:
+        print(f"\n")  # I really don't know why this works but don't touch it I guess
+        print(f"Before you continue, a {Colors.UNDERLINE}cultural fact{Colors.END}:")
+        print(f'"{cultural_facts[-1]}"')
+        cultural_facts.pop()
+        getch(f"\nPRESS {Colors.GREEN}ANY KEY{Colors.END} TO ADVANCE...")
 
     # show scenes
     active_scene = get_scene(active_id)

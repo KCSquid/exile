@@ -212,7 +212,8 @@
           "next_scene": "neighborhood_intro_learned_welcome",
           "stat_changes": {
             "language": 1,
-            "confidence": 1
+            "confidence": 1,
+            "cultural_knowledge": 1
           }
         }
       ]
@@ -226,7 +227,8 @@
           "next_scene": "culture_connection",
           "stat_changes": {
             "cultural_identity": 2,
-            "trust": 1
+            "trust": 1,
+            "cultural_knowledge": 1
           }
         },
         {
@@ -305,7 +307,8 @@
             "trust": 1,
             "confidence": 1,
             "language": 1,
-            "days": 7
+            "days": 7,
+            "cultural_knowledge": 1
           }
         }
       ]
@@ -319,7 +322,8 @@
           "next_scene": "culture_connection_learned_greet",
           "stat_changes": {
             "language": 1,
-            "confidence": 1
+            "confidence": 1,
+            "cultural_knowledge": 1
           }
         }
       ]
@@ -333,7 +337,8 @@
           "next_scene": "build_community",
           "stat_changes": {
             "trust": 2,
-            "cultural_identity": 1
+            "cultural_identity": 1,
+            "cultural_knowledge": 1
           }
         },
         {
@@ -356,7 +361,8 @@
             "language": 1,
             "confidence": 1,
             "money": -1,
-            "days": 30
+            "days": 30,
+            "cultural_knowledge": 1
           }
         },
         {
@@ -600,7 +606,8 @@
           "next_scene": "build_community_learned_ask_directions",
           "stat_changes": {
             "language": 1,
-            "confidence": 1
+            "confidence": 1,
+            "cultural_knowledge": 1
           }
         }
       ]
@@ -631,7 +638,8 @@
           "stat_changes": {
             "cultural_identity": 2,
             "trust": 2,
-            "confidence": 1
+            "confidence": 1,
+            "cultural_knowledge": 1
           }
         }
       ]
@@ -645,7 +653,8 @@
           "next_scene": "festival_event_learned_sing_along",
           "stat_changes": {
             "language": 1,
-            "confidence": 1
+            "confidence": 1,
+            "cultural_knowledge": 1
           }
         }
       ]
@@ -777,7 +786,8 @@
           "next_scene": "build_community",
           "stat_changes": {
             "trust": 2,
-            "cultural_identity": 1
+            "cultural_identity": 1,
+            "cultural_knowledge": 1
           }
         },
         {
