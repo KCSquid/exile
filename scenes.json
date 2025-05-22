@@ -50,7 +50,7 @@
     },
     {
       "id": "metro_confusion",
-      "text": "You get vague directions and take the wrong train. A kind older man notices your struggle.\nYOU: \"Sorry, do you know which train goes to the center?\"\nOLD MAN: \"Ah, you are lost? Come, I show you, ${name}.\"\nHe encourages you: ASK FOR HELP",
+      "text": "You get vague directions and take the wrong train. A kind older man notices your struggle.\nYOU: \"Sorry, do you know which train goes to the center?\"\nOLD MAN: \"${translations.are_you_lost} (Ah, you are lost? Come, I show you, ${name}.)\"\nHe encourages you: ASK FOR HELP",
       "choices": [
         {
           "text": "Learn how to ask for help from the phrasebook.",
@@ -87,7 +87,7 @@
     },
     {
       "id": "wifi_search",
-      "text": "You find a café with Wi-Fi, but they ask you to buy something first.\nBARISTA: \"You want Wi-Fi? You buy coffee, yes?\"\nYou remember: ORDER COFFEE",
+      "text": "You find a café with Wi-Fi, but they ask you to buy something first.\nBARISTA: \"${translations.buy_coffee_wifi} (You want Wi-Fi? You buy coffee, yes?)\"\nYou remember: ORDER COFFEE",
       "choices": [
         {
           "text": "Learn how to order coffee from the phrasebook.",
@@ -124,7 +124,7 @@
     },
     {
       "id": "rejected",
-      "text": "The barista frowns and shakes their head. \"Sorry, Wi-Fi only for customers.\" You feel embarrassed and leave the café.",
+      "text": "The barista frowns and shakes their head. \"${translations.wifi_customers_only} (Sorry, Wi-Fi only for customers.)\" You feel embarrassed and leave the café.",
       "choices": [
         {
           "text": "Buy a coffee after all.",
@@ -170,7 +170,7 @@
     },
     {
       "id": "help_received",
-      "text": "The man helps you find your way and gives you tips for surviving the city.\nOLD MAN: \"Be careful, not everyone is friendly. But you will learn, ${name}. Good luck!\"\nHe teaches you: THANK SOMEONE",
+      "text": "The man helps you find your way and gives you tips for surviving the city.\nOLD MAN: \"${translations.be_careful} (Be careful, not everyone is friendly. But you will learn, ${name}. Good luck!)\"\nHe teaches you: THANK SOMEONE",
       "choices": [
         {
           "text": "Learn how to thank someone from the phrasebook.",
@@ -205,7 +205,7 @@
     },
     {
       "id": "neighborhood_intro",
-      "text": "You walk through a neighborhood that reminds you of home. A local cultural center invites you in.\nCENTER HOST: \"Come, join us, ${name}! We have music and tea.\"\nYou see a sign: WELCOME",
+      "text": "You walk through a neighborhood that reminds you of home. A local cultural center invites you in.\nCENTER HOST: \"${translations.come_join_us} (Come, join us, ${name}! We have music and tea.)\"\nYou see a sign: WELCOME",
       "choices": [
         {
           "text": "Learn how to say welcome from the phrasebook.",
@@ -243,7 +243,7 @@
     },
     {
       "id": "find_shelter",
-      "text": "You get a small room. The landlord is shady and asks for extra under the table.\nLANDLORD: \"You pay little more, no contract. Okay?\"",
+      "text": "You get a small room. The landlord is shady and asks for extra under the table.\nLANDLORD: \"${translations.pay_more_no_contract} (You pay little more, no contract. Okay?)\"",
       "choices": [
         {
           "text": "Pay it to avoid trouble.",
@@ -266,7 +266,7 @@
     },
     {
       "id": "job_hunt",
-      "text": "You apply for cleaning and delivery jobs. Interviews go badly due to language barriers.\nINTERVIEWER: \"Sorry, your language... not enough. Maybe next time.\"\nYou practice: TALK ABOUT EXPERIENCE",
+      "text": "You apply for cleaning and delivery jobs. Interviews go badly due to language barriers.\nINTERVIEWER: \"${translations.language_not_enough} (Sorry, your language... not enough. Maybe next time.)\"\nYou practice: TALK ABOUT EXPERIENCE",
       "choices": [
         {
           "text": "Learn how to talk about experience from the phrasebook.",
@@ -315,7 +315,7 @@
     },
     {
       "id": "culture_connection",
-      "text": "You learn new things about your own roots and meet others from your homeland.\nNEW FRIEND: \"We meet every week, ${name}. You should come!\"\nAt the event, you practice: GREET SOMEONE",
+      "text": "You learn new things about your own roots and meet others from your homeland.\nNEW FRIEND: \"${translations.meet_every_week} (We meet every week, ${name}. You should come!)\"\nAt the event, you practice: GREET SOMEONE",
       "choices": [
         {
           "text": "Learn how to greet someone from the phrasebook.",
@@ -352,7 +352,7 @@
     },
     {
       "id": "language_boost",
-      "text": "Your effort pays off. You now understand basic conversations and feel more confident.\nYOU: \"Excuse me, where is the library?\"\nSTRANGER: \"Down the street, left at the corner.\"",
+      "text": "Your effort pays off. You now understand basic conversations and feel more confident.\nYOU: \"Excuse me, where is the library?\"\nSTRANGER: \"${translations.library_directions} (Down the street, left at the corner.)\"",
       "choices": [
         {
           "text": "Apply to a community college for night classes.",
@@ -427,7 +427,7 @@
     },
     {
       "id": "legal_trouble",
-      "text": "You report the shady landlord, but things escalate quickly. The authorities get involved, and your immigration status becomes a bigger issue. After a few days, you are detained and told to leave the country.\nOFFICER: \"You must come with us. There is a problem with your papers.\"",
+      "text": "You report the shady landlord, but things escalate quickly. The authorities get involved, and your immigration status becomes a bigger issue. After a few days, you are detained and told to leave the country.\nOFFICER: \"${translations.problem_with_papers} (You must come with us. There is a problem with your papers.)\"",
       "choices": [
         {
           "text": "Fight it out in court.",
@@ -450,7 +450,7 @@
     },
     {
       "id": "underpaid_job",
-      "text": "You lie about your previous work experience and land a job as a cleaner in a hotel. The pay is miserable, and the work conditions are harsh. After a month of being overworked and underpaid, you’re let go.\nMANAGER: \"Sorry, we don't need you anymore.\"",
+      "text": "You lie about your previous work experience and land a job as a cleaner in a hotel. The pay is miserable, and the work conditions are harsh. After a month of being overworked and underpaid, you’re let go.\nMANAGER: \"${translations.no_longer_needed} (Sorry, we don't need you anymore.)\"",
       "choices": [
         {
           "text": "Try to find another job immediately.",
@@ -481,7 +481,7 @@
     },
     {
       "id": "coworker_help",
-      "text": "Your coworker sympathizes and offers to introduce you to a friend who knows about better jobs.\nCOWORKER: \"My cousin works at a restaurant. Maybe they need help, ${name}.\"",
+      "text": "Your coworker sympathizes and offers to introduce you to a friend who knows about better jobs.\nCOWORKER: \"${translations.cousin_restaurant_job} (My cousin works at a restaurant. Maybe they need help, ${name}.)\"",
       "choices": [
         {
           "text": "Meet the cousin and try for a restaurant job.",
@@ -503,7 +503,7 @@
     },
     {
       "id": "restaurant_trial",
-      "text": "You get a trial shift at the restaurant. The work is fast-paced, but you manage to keep up. The boss seems impressed. \"${name}, you work hard!\"\nA coworker teaches you: ASK FOR BREAK: ${language.ask_break}",
+      "text": "You get a trial shift at the restaurant. The work is fast-paced, but you manage to keep up. The boss seems impressed. \"${translations.you_work_hard} (${name}, you work hard!)\"\nA coworker teaches you: ASK FOR BREAK: ${language.ask_break}",
       "choices": [
         {
           "text": "Learn how to ask for a break from the phrasebook.",
@@ -539,7 +539,7 @@
     },
     {
       "id": "restaurant_job",
-      "text": "You work at the restaurant for a month. The pay is better, and you pick up more of the local language from coworkers. \"${name}, you’re part of the team now,\" says your boss.\nYou learn: SAY GOOD JOB: ${language.good_job}",
+      "text": "You work at the restaurant for a month. The pay is better, and you pick up more of the local language from coworkers. \"${translations.part_of_team} (${name}, you’re part of the team now,)\" says your boss.\nYou learn: SAY GOOD JOB: ${language.good_job}",
       "choices": [
         {
           "text": "Learn how to say good job from the phrasebook.",
@@ -599,7 +599,7 @@
     },
     {
       "id": "build_community",
-      "text": "You start a small support group for newcomers and people struggling with the same challenges. Slowly, you build a network of people who help each other with housing, jobs, and emotional support.\nGROUP MEMBER: \"Thank you, ${name}, for helping me find a place. I couldn't have done it alone.\"\nYou teach newcomers: HOW TO ASK FOR DIRECTIONS: ${language.ask_directions}",
+      "text": "You start a small support group for newcomers and people struggling with the same challenges. Slowly, you build a network of people who help each other with housing, jobs, and emotional support.\nGROUP MEMBER: \"${translations.thank_you_help_find_place} (Thank you, ${name}, for helping me find a place. I couldn't have done it alone.)\"\nYou teach newcomers: HOW TO ASK FOR DIRECTIONS: ${language.ask_directions}",
       "choices": [
         {
           "text": "Learn how to ask for directions from the phrasebook.",
@@ -736,7 +736,7 @@
     },
     {
       "id": "pet_companion",
-      "text": "You adopt a small pet. Its presence lifts your spirits and helps you feel less alone. The shelter staff smile: \"${name}, this little one will be your friend now.\"",
+      "text": "You adopt a small pet. Its presence lifts your spirits and helps you feel less alone. The shelter staff smile: \"${translations.this_one_your_friend} (${name}, this little one will be your friend now.)\"",
       "choices": [
         {
           "text": "Join a local pet owner group.",
@@ -757,7 +757,7 @@
     },
     {
       "id": "volunteer_experience",
-      "text": "You volunteer at a local charity, helping others and improving your language skills. The staff appreciate your effort. \"${name}, you make a real difference here,\" they say.\nYou help translate: HELP SOMEONE",
+      "text": "You volunteer at a local charity, helping others and improving your language skills. The staff appreciate your effort. \"${translations.make_difference_here} (${name}, you make a real difference here,)\" they say.\nYou help translate: HELP SOMEONE",
       "choices": [
         {
           "text": "Learn how to help someone from the phrasebook.",

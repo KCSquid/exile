@@ -1,12 +1,12 @@
+import builtins
+import json
 import os
+import platform
 import re
 import sys
-import tty
-import json
-import time
 import termios
-import platform
-import builtins
+import time
+import tty
 
 
 # ANSI codes
@@ -65,6 +65,7 @@ OPTIONS_COUNTRIES = [
     {"name": "Kyiv, Ukraine", "code": "ua"},
     {"name": "Kingston, Jamaica", "code": "jm"},
     {"name": "Toronto, Canada", "code": "ca"},
+    {"name": "Mumbai, India", "code": "in"},
 ]
 OPTIONS_COLORS = [
     Colors.YELLOW,
@@ -73,6 +74,7 @@ OPTIONS_COLORS = [
     Colors.PURPLE,
     Colors.GREEN,
     Colors.RED,
+    Colors.UNDERLINE,
 ]
 OPTIONS_TEXT_SPEED = [
     {"name": "FAST", "value": 5},
@@ -105,6 +107,7 @@ def clean_string(string: str):
     return " ".join([w[0].upper() + w[1:] for w in string.split("_")])
 
 
+# clear screen based on os
 def clear_screen():
     if platform.system() == "Windows":
         os.system("cls")
@@ -160,6 +163,13 @@ def lang_sub(match):
     return language.get(key, f"<{key}>")
 
 
+# sub trans keys
+def trans_sub(match):
+    key = match.group(1)
+    return translations.get(key, f"<{key}>")
+
+
+# get a choice from a list (easy to repeat)
 def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
     print("\n> OPTIONS")
     for i in range(len(choices)):
@@ -173,12 +183,12 @@ def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
             # adjust for 0 index
             char_input = getch()
             if char_input == "q":
-                print("'q' Detected, quitting... Thank you for playing!")
+                print("Press Ctrl+C to exit... Thank you for playing!")
                 exit(0)
             choice = int(char_input) - 1
             if choice >= 0 and choice <= len(choices) - 1:
                 break
-        except:
+        except Exception:
             continue
 
     return choice
@@ -205,10 +215,13 @@ while True:
 
     # after player.country set, load the language file
     language = {}
+    translations = {}
     with open(f"./languages/{player.language_code}.json") as f:
-        language = json.load(f)
+        data = json.load(f)
+        language = data["phrases"]
+        translations = data["translations"]
+        cultural_facts = data["cultural_facts"]
 
-    cultural_facts = language["cultural_facts"]
     MAX_FACTS_LEN = len(cultural_facts)
 
     # reset everything
@@ -217,6 +230,7 @@ while True:
     active_id = "arrival"
     stat_changes = {}
     player.resetStats()
+
     # game loop
     while True:
         # check if game over by stats
@@ -280,6 +294,7 @@ while True:
         text = re.sub(r"\$\{name\}", player.name, active_scene["text"])
 
         text = re.sub(r"\$\{language\.([a-zA-Z0-9_]+)\}", lang_sub, text)
+        text = re.sub(r"\$\{translations\.([a-zA-Z0-9_]+)\}", trans_sub, text)
         text = re.sub(r"\$\{name\}", f"_____ ({player.name})", text)
 
         # update only days prematurely because it matters for info

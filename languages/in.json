@@ -1,0 +1,43 @@
+{
+  "translations": {
+    "are_you_lost": "क्या आप रास्ता भटक गए हैं?",
+    "buy_coffee_wifi": "आप वाई-फाई चाहते हैं? आपको एक कॉफी खरीदनी होगी, ठीक है?",
+    "wifi_customers_only": "माफ़ कीजिए, वाई-फाई केवल ग्राहकों के लिए है।",
+    "be_careful": "सावधान रहें, हर कोई दोस्ताना नहीं होता।",
+    "come_join_us": "आइए, हमारे साथ जुड़िए, ${name}! हमारे पास संगीत और चाय है।",
+    "pay_more_no_contract": "आपको थोड़ा ज़्यादा देना होगा, कोई अनुबंध नहीं। ठीक है?",
+    "language_not_enough": "माफ़ कीजिए, आपकी भाषा की जानकारी पर्याप्त नहीं है। शायद अगली बार।",
+    "meet_every_week": "हम हर हफ्ते मिलते हैं, ${name}। आपको आना चाहिए!",
+    "library_directions": "सड़क के नीचे, कोने पर बाएँ मुड़ें।",
+    "problem_with_papers": "आपको हमारे साथ चलना होगा। आपके कागज़ात में समस्या है।",
+    "no_longer_needed": "माफ़ कीजिए, अब हमें आपकी ज़रूरत नहीं है।",
+    "cousin_restaurant_job": "मेरा चचेरा भाई एक रेस्टोरेंट में काम करता है। शायद उन्हें मदद चाहिए, ${name}।",
+    "you_work_hard": "${name}, आप बहुत मेहनत करते हैं!",
+    "part_of_team": "${name}, अब आप टीम का हिस्सा हैं।",
+    "thank_you_help_find_place": "धन्यवाद, ${name}, मुझे जगह ढूँढने में मदद करने के लिए। मैं अकेले नहीं कर पाता।",
+    "this_one_your_friend": "${name}, यह छोटा अब आपका दोस्त होगा।",
+    "make_difference_here": "${name}, आप यहाँ सच में फर्क ला रहे हैं।"
+  },
+  "phrases": {
+    "introduce": "नमस्ते, मेरा नाम ${name} है।",
+    "ask_help": "क्या आप मेरी मदद कर सकते हैं, कृपया?",
+    "order_coffee": "मुझे एक कॉफी चाहिए, कृपया।",
+    "thank_you": "बहुत धन्यवाद!",
+    "welcome": "स्वागत है!",
+    "greet": "नमस्ते!",
+    "experience": "मेरे पास ... का अनुभव है।",
+    "ask_break": "क्या मैं थोड़ा ब्रेक ले सकता हूँ?",
+    "good_job": "शानदार काम!",
+    "ask_directions": "मैं ... कैसे जा सकता हूँ?",
+    "sing_along": "हमारे साथ गाओ!",
+    "help_someone": "क्या मैं आपकी मदद कर सकता हूँ?",
+    "from": "मैं ... से हूँ।"
+  },
+  "cultural_facts": [
+    "India is known for its diverse cultures, languages, and religions.",
+    "The Taj Mahal in Agra is one of the Seven Wonders of the World.",
+    "Yoga originated in ancient India and is practiced worldwide.",
+    "India celebrates many festivals, including Diwali, Holi, and Eid.",
+    "The Indian film industry, Bollywood, produces the most films in the world."
+  ]
+}
