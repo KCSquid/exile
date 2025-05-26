@@ -291,11 +291,16 @@ while True:
         active_scene = get_scene(active_id)
 
         clear_name = clean_string(active_scene["id"])
-        text = re.sub(r"\$\{name\}", player.name, active_scene["text"])
 
+        text = active_scene["text"]
+        text = re.sub(
+            r"\$\{name\}", player.name, active_scene["text"]
+        )  # first time for just name
         text = re.sub(r"\$\{language\.([a-zA-Z0-9_]+)\}", lang_sub, text)
         text = re.sub(r"\$\{translations\.([a-zA-Z0-9_]+)\}", trans_sub, text)
-        text = re.sub(r"\$\{name\}", f"_____ ({player.name})", text)
+        text = re.sub(
+            r"\$\{name\}", f"_____ ({player.name})", text
+        )  # second time for language/translation
 
         # update only days prematurely because it matters for info
         if not game_over and "days" in stat_changes:
