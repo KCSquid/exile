@@ -2,6 +2,7 @@ import builtins
 import json
 import os
 import platform
+import random
 import re
 import sys
 import termios
@@ -17,6 +18,7 @@ class Colors:
     CYAN = "\033[96m"
     BLUE = "\033[94m"
     PURPLE = "\033[95m"
+    GRAY = "\033[90m"
     END = "\033[0m"
     BOLD = "\033[1m"
     UNDERLINE = "\033[4m"
@@ -68,12 +70,12 @@ OPTIONS_COUNTRIES = [
     {"name": "Mumbai, India", "code": "in"},
 ]
 OPTIONS_COLORS = [
+    Colors.RED,
     Colors.YELLOW,
+    Colors.GREEN,
     Colors.CYAN,
     Colors.BLUE,
     Colors.PURPLE,
-    Colors.GREEN,
-    Colors.RED,
     Colors.UNDERLINE,
 ]
 OPTIONS_TEXT_SPEED = [
@@ -81,6 +83,10 @@ OPTIONS_TEXT_SPEED = [
     {"name": "MEDIUM", "value": 15},
     {"name": "SLOW", "value": 30},
     {"name": "INSTANT", "value": 0},
+]
+OPTIONS_GAME_OVER = [
+    {"title": "Head to AIRPORT (Restart)", "value": 0},
+    {"title": "Head back HOME (Quit)", "value": 1},
 ]
 
 # global game settings
@@ -125,10 +131,14 @@ def typewrite(string: str):
 
 
 # edit std func print to show ANSI reset by default
-def print(*args, color: str = None, **kwargs):
+def print(*args, color: str = None, colors: list[str] = None, **kwargs):
     if args:
         msg = " ".join(str(a) for a in args)
-        if color:
+        if colors:
+            for c in colors:
+                msg = f"{c}{msg}"
+            msg = f"{msg}{Colors.END}"
+        elif color:
             msg = f"{color}{msg}{Colors.END}"
         # prevent dupes
         elif not msg.endswith(Colors.END):
@@ -151,26 +161,26 @@ def getch(prompt: str = ""):
         new_settings = termios.tcgetattr(fd)
         new_settings[3] = new_settings[3] & ~termios.ECHO
         termios.tcsetattr(fd, termios.TCSADRAIN, new_settings)
-        ch = sys.stdin.read(1)
+        char = sys.stdin.read(1)
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
+    return char
 
 
-# sub lang keys
-def lang_sub(match):
+def get_language_key(match):
     key = match.group(1)
     return language.get(key, f"<{key}>")
 
 
-# sub trans keys
-def trans_sub(match):
+def get_translation_key(match):
     key = match.group(1)
     return translations.get(key, f"<{key}>")
 
 
-# get a choice from a list (easy to repeat)
-def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
+# get a choice from a list (easy to reuse)
+def get_choice(
+    choices, key: str, supports_default: bool = False, prompt: str = "\n> OPTIONS"
+):
     print("\n> OPTIONS")
     for i in range(len(choices)):
         choice_text = choices[i][key]
@@ -180,11 +190,16 @@ def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
     print("\n> ", end="")
     while True:
         try:
-            # adjust for 0 index
             char_input = getch()
             if char_input == "q":
-                print("Press Ctrl+C to exit... Thank you for playing!")
+                print("'q' detected, exiting... Thank you for playing!")
                 exit(0)
+
+            # enter key
+            if supports_default and char_input == "\r":
+                return -1
+
+            # adjust for 0 index
             choice = int(char_input) - 1
             if choice >= 0 and choice <= len(choices) - 1:
                 break
@@ -197,21 +212,64 @@ def get_choice(choices, key: str, prompt: str = "\n> OPTIONS"):
 # restart loop
 while True:
     clear_screen()
+    print("Welcome to:", color=Colors.UNDERLINE)
+    print(
+        """ ______     __  __     __     __         ______    
+/\  ___\   /\_\_\_\   /\ \   /\ \       /\  ___\   
+\ \  __\   \/_/\_\/_  \ \ \  \ \ \____  \ \  __\   
+ \ \_____\   /\_\/\_\  \ \_\  \ \_____\  \ \_____\ 
+  \/_____/   \/_/\/_/   \/_/   \/_____/   \/_____/ 
+                                                   """
+    )
+    print("LOST IN TRANSLATION\n", color=Colors.UNDERLINE)
+
+    if not played_before:
+        print(
+            f"When you see options like {Colors.RED}[1]{Colors.END}, press the corresponding key on your keyboard to continue."
+        )
+        print(
+            f"You may use {Colors.YELLOW}'q'{Colors.END} at any time during an option to exit the program."
+        )
+        print(
+            f"Press {Colors.GREEN}ENTER{Colors.END} on the following options to choose the default."
+        )
+        print()
+
+    print("-" * 50)
+    print()
     if not played_before:
         # get player info
-        dirtyName = input("Welcome player! What's your name? ")
-        dirtyName = dirtyName[0].upper() + dirtyName[1:]
-        player.name = dirtyName
+        while True:
+            dirty_name = input("Welcome player! What's your name? ")
+            if not dirty_name:
+                print("You need a name!")
+                continue
+
+            dirty_name = dirty_name[0].upper() + dirty_name[1:]
+            player.name = dirty_name
+            break
 
     print(f"Welcome, {player.name}! Which country would you like to live in?")
-    country_choice = get_choice(OPTIONS_COUNTRIES, "name")
-    player.country = OPTIONS_COUNTRIES[country_choice]["name"]
-    player.language_code = OPTIONS_COUNTRIES[country_choice]["code"]
+    country_choice = get_choice(OPTIONS_COUNTRIES, "name", True)
+
+    selected_country = ""
+    if country_choice == -1:
+        selected_country = random.choice(OPTIONS_COUNTRIES)
+        print(f"{selected_country["name"]}, has been selected randomly!\n")
+    else:
+        selected_country = OPTIONS_COUNTRIES[country_choice]
+
+    player.country = selected_country["name"]
+    player.language_code = selected_country["code"]
 
     if not played_before:
         print("And what about your text speed?")
-        text_speed_choice = get_choice(OPTIONS_TEXT_SPEED, "name")
-        player.text_speed = OPTIONS_TEXT_SPEED[text_speed_choice]["value"]
+        text_speed_choice = get_choice(OPTIONS_TEXT_SPEED, "name", True)
+
+        if text_speed_choice == -1:
+            player.text_speed = OPTIONS_TEXT_SPEED[1]["value"]
+        else:
+            player.text_speed = OPTIONS_TEXT_SPEED[text_speed_choice]["value"]
 
     # after player.country set, load the language file
     language = {}
@@ -296,8 +354,8 @@ while True:
         text = re.sub(
             r"\$\{name\}", player.name, active_scene["text"]
         )  # first time for just name
-        text = re.sub(r"\$\{language\.([a-zA-Z0-9_]+)\}", lang_sub, text)
-        text = re.sub(r"\$\{translations\.([a-zA-Z0-9_]+)\}", trans_sub, text)
+        text = re.sub(r"\$\{language\.([a-zA-Z0-9_]+)\}", get_language_key, text)
+        text = re.sub(r"\$\{translations\.([a-zA-Z0-9_]+)\}", get_translation_key, text)
         text = re.sub(
             r"\$\{name\}", f"_____ ({player.name})", text
         )  # second time for language/translation
@@ -307,7 +365,8 @@ while True:
             player.editStat("days", stat_changes["days"])
 
         clear_screen()
-        print("EXILE: LOST IN TRANSLATION", color=Colors.UNDERLINE)
+        print("EXILE:", end="", color=Colors.UNDERLINE)
+        print(" LOST IN TRANSLATION", colors=[Colors.UNDERLINE, Colors.GRAY])
         print(f"Day {player.getStat("days") + 1}")
         print(f"{clear_name} - {player.country}")
 
@@ -358,14 +417,7 @@ while True:
     for stat in player.stats:
         typewrite(f"{clean_string(stat)}: {player.getStat(stat)}")
 
-    choice = get_choice(
-        [
-            {"title": "Head to AIRPORT (Restart)", "value": 0},
-            {"title": "Head back HOME (Quit)", "value": 1},
-        ],
-        "title",
-    )
-
+    choice = get_choice(OPTIONS_GAME_OVER, "title")
     if choice == 1:
         print(f"\nGoodbye!")
         break
